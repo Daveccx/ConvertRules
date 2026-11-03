@@ -207,12 +207,12 @@ proxy-groups:
   - {name: AI, type: fallback, proxies: [美国自动策略, 日本自动策略, 台湾自动策略, 新国故转, 美国故转], icon: 'https://fastly.jsdelivr.net/gh/Koolson/Qure@master/IconSet/Color/ChatGPT.png'}
   - {name: 兜底后备策略, type: select, proxies: [DIRECT, 全部节点, 全部负载均衡, 美国自动策略, 美国故转, 香港故转, 香港自动策略, 台湾故转, 日本故转, 韩国故转, 新国故转, 英国故转, 法国故转, 德国故转, 顶级机场,Kitty,亏本机场, 赔钱机场, 良心云,干杯机场], icon: 'https://fastly.jsdelivr.net/gh/Orz-3/mini@master/Color/Final.png'}
   - {name: telegram, type: select, proxies: [全部节点, 美国自动策略, 美国故转, 香港故转, 香港自动策略, 台湾故转, 日本故转, 韩国故转, 新国故转, 英国故转, 法国故转, 德国故转, 顶级机场,Kitty,亏本机场, 赔钱机场, 亏本机场, 良心云,干杯机场], icon: 'https://fastly.jsdelivr.net/gh/Orz-3/mini@master/Color/Telegram.png'}
-  - {name: 干杯机场, type: select, use: [干杯机场], exclude-filter: "剩余|流量|官网|套餐|到期|游戏", icon: 'https://fastly.jsdelivr.net/gh/Orz-3/mini@master/Color/Vpn.png'}
-  - {name: 赔钱机场, type: select, use: [赔钱机场], exclude-filter: "剩余|流量|官网|套餐|到期|游戏", icon: 'https://fastly.jsdelivr.net/gh/Orz-3/mini@master/Color/Vpn.png'}
-  - {name: 亏本机场, type: select, use: [亏本机场], exclude-filter: "剩余|流量|官网|套餐|到期|游戏", icon: 'https://fastly.jsdelivr.net/gh/Orz-3/mini@master/Color/Vpn.png'}
+  - {name: 干杯机场, type: select, use: [干杯机场], exclude-filter: "剩余|流量|官网|套餐|到期|游戏", icon: 'https://cdn.jsdelivr.net/gh/Daveccx/ConvertRules@main/icons/ganbei.png'}
+  - {name: 赔钱机场, type: select, use: [赔钱机场], exclude-filter: "剩余|流量|官网|套餐|到期|游戏", icon: 'https://cdn.jsdelivr.net/gh/Daveccx/ConvertRules@main/icons/peiqian.png'}
+  - {name: 亏本机场, type: select, use: [亏本机场], exclude-filter: "剩余|流量|官网|套餐|到期|游戏", icon: 'https://cdn.jsdelivr.net/gh/Daveccx/ConvertRules@main/icons/kuiben.png'}
   - {name: 良心云, type: select, use: [良心云], exclude-filter: "剩余|流量|官网|套餐|到期|游戏", icon: 'https://fastly.jsdelivr.net/gh/Orz-3/mini@master/Color/Vpn.png'}
-  - {name: Kitty, type: select, use: [Kitty], exclude-filter: "剩余|流量|官网|套餐|到期|游戏|距离下次", icon: 'https://fastly.jsdelivr.net/gh/Orz-3/mini@master/Color/Vpn.png'}
-  - {name: 顶级机场, type: select, use: [顶级机场], exclude-filter: "剩余|流量|官网|套餐|到期|游戏|距离下次", icon: 'https://fastly.jsdelivr.net/gh/Orz-3/mini@master/Color/Vpn.png'}
+  - {name: Kitty, type: select, use: [Kitty], exclude-filter: "剩余|流量|官网|套餐|到期|游戏|距离下次", icon: 'https://cdn.jsdelivr.net/gh/Daveccx/ConvertRules@main/icons/kitty.png'}
+  - {name: 顶级机场, type: select, use: [顶级机场], exclude-filter: "剩余|流量|官网|套餐|到期|游戏|距离下次", icon: 'https://cdn.jsdelivr.net/gh/Daveccx/ConvertRules@main/icons/dingji.png'}
  
   - {name: 香港故转, <<: *FallBack, filter: *FilterHK, icon: 'https://fastly.jsdelivr.net/gh/Orz-3/mini@master/Color/HK.png'}
   - {name: 台湾故转, <<: *FallBack, filter: *FilterTW, icon: 'https://fastly.jsdelivr.net/gh/Orz-3/mini@master/Color/TW.png'}
