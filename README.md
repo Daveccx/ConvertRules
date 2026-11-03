@@ -6,7 +6,7 @@ Daveccx 的 mihomo 配置与规则集。公开仓库中不保存订阅链接、�
 
 | 路径 | 用途 |
 | --- | --- |
-| `configs/` | Clash Verge、CMFA、FlClash 四端模板，以及完整 `mihomo.yaml` 主配置 |
+| `configs/` | Clash Verge、Clash Meta、FlClash 四端模板，以及完整 `mihomo.yaml` 主配置 |
 | `rules/ALan.yaml` | 个人直连规则，人工维护 |
 | `rules/myProxy_ip.yaml` | 个人代理规则，人工维护 |
 | `rules/*.yaml` | 每日从 MetaCubeX 下载的公共规则 |
@@ -17,9 +17,10 @@ Daveccx 的 mihomo 配置与规则集。公开仓库中不保存订阅链接、�
 1. 从 `configs/` 下载对应客户端模板；需要完整 DNS、TUN、端口和策略组时使用 `mihomo.yaml`。
 2. 在 `proxy-providers` 中填入自己的订阅 URL；这些 URL 只应保存在本机。
 3. 默认端口：`mixed-port: 7890`；完整 `mihomo.yaml` 使用 `7890/7891/7892/7893/7894`。
-4. Windows 客户端如果使用 TUN，请在客户端界面开启；FlClash/Verge 的界面开关会覆盖配置文件。FlClash 界面还可能覆盖 `find-process-mode`、DNS 和端口。
-5. `ALan` 和 `myProxy_ip` 通过仓库 URL 引用；修改后客户端重新下载规则即可。
-6. Actions 每天北京时间 04:00 更新公共规则，不会覆盖这两个个人文件。
+4. 四份客户端模板已移除各客户端不支持的字段：FlClash 模板不含 DNS/TUN/Sniffer/进程模式，Clash Verge 模板不含端口/TUN/DNS，Clash Meta 模板不含桌面端口和进程匹配。
+5. TUN、DNS、端口由客户端界面管理；界面开关会覆盖同名配置。
+6. `ALan` 和 `myProxy_ip` 通过仓库 URL 引用；修改后客户端重新下载规则即可。
+7. Actions 每天北京时间 04:00 更新公共规则，不会覆盖这两个个人文件。
 
 Raw URL：
 
