@@ -1,9 +1,5 @@
-# ==========================================================================
 # Clash Meta / CMFA · Android
-# 导入：Clash Meta -> 配置 -> 从文件导入
-# 端口：mixed-port 7890；TUN/DNS 由客户端界面管理
-# 说明：本文件不包含桌面端专属端口、进程匹配、Sniffer，避免 Android 客户端报错。
-# ==========================================================================
+# 端口、DNS、TUN 由客户端界面管理。
 
 mixed-port: 7890
 unified-delay: true
@@ -877,7 +873,7 @@ rules:
 - RULE-SET, YouTube, 全球选择
 - RULE-SET, TikTok, 全球选择
 - RULE-SET, Netflix, 全球选择
-- RULE-SET, Emby, Emby选择
+- RULE-SET, Emby, 全球选择
 - RULE-SET, LAN, DIRECT
 - RULE-SET, Private, DIRECT
 - RULE-SET, Direct, DIRECT
