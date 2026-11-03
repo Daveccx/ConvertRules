@@ -453,7 +453,7 @@ rules:
   - RULE-SET, Steam, 全球选择
   - RULE-SET, Game, 游戏选择
   - RULE-SET, Speedtest, 全球选择
-  - RULE-SET, Apple, DIRECT
+  - RULE-SET, Apple, 全球选择
   - RULE-SET, iCloudChina, DIRECT
   - RULE-SET, AppStore, 全球选择
   - RULE-SET, TestFlight, 全球选择
