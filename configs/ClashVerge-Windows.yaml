@@ -79,375 +79,286 @@ proxy-providers:
     path: ./proxy_providers/provider-6.yaml
     override:
       additional-prefix: '[顶级机场] '
-FilterHK: ^(?=.*((?i)🇭🇰|香港|(\b(HK|HKG|Hong)(\d+)?\b)))(?!.*((?i)回国|校园|游戏|🎮|(\b(GAME)\b))).*$
-FilterTW: ^(?=.*((?i)🇹🇼|台湾|(\b(TW|TWN|Tai|Taiwan)(\d+)?\b)))(?!.*((?i)回国|校园|游戏|🎮|(\b(GAME)\b))).*$
-FilterJP: ^(?=.*((?i)🇯🇵|日本|川日|东京|大阪|泉日|埼玉|(\b(JP|JPN|Japan)(\d+)?\b)))(?!.*((?i)回国|校园|游戏|🎮|(\b(GAME)\b))).*$
-FilterKR: ^(?=.*((?i)🇰🇷|韩国|韓|首尔|(\b(KR|KOR|Korea)(\d+)?\b)))(?!.*((?i)回国|校园|游戏|🎮|(\b(GAME)\b))).*$
-FilterSG: ^(?=.*((?i)🇸🇬|新加坡|狮|(\b(SG|SGP|Singapore)(\d+)?\b)))(?!.*((?i)回国|校园|游戏|🎮|(\b(GAME)\b))).*$
-FilterUS: ^(?=.*((?i)🇺🇸|美国|波特兰|达拉斯|俄勒冈|凤凰城|费利蒙|硅谷|拉斯维加斯|洛杉矶|圣何塞|圣克拉拉|西雅图|芝加哥|(\b(US|USA|United States)(\d+)?\b)))(?!.*((?i)回国|校园|游戏|🎮|(\b(GAME)\b))).*$
-FilterUK: ^(?=.*((?i)🇬🇧|英国|伦敦|(\b(UK|GBR|United Kingdom)(\d+)?\b)))(?!.*((?i)回国|校园|游戏|🎮|(\b(GAME)\b))).*$
-FilterFR: ^(?=.*((?i)🇫🇷|法国|(\b(FR|FRA|France)(\d+)?\b)))(?!.*((?i)回国|校园|游戏|🎮|(\b(GAME)\b))).*$
-FilterDE: ^(?=.*((?i)🇩🇪|德国|(\b(DE|DEU|Germany)(\d+)?\b)))(?!.*((?i)回国|校园|游戏|🎮|(\b(GAME)\b))).*$
-FilterGame: ^(?=.*((?i)游戏|🎮|(\b(GAME)(\d+)?\b)))(?!.*((?i)回国|校园)).*$
-FilterAll: ^(?=.*(.))(?!.*((?i)群|邀请|返利|循环|官网|客服|网站|网址|获取|订阅|流量|到期|机场|下次|版本|官址|备用|过期|已用|联系|邮箱|工单|贩卖|通知|倒卖|防止|国内|地址|频道|无法|说明|使用|提示|特别|访问|支持|教程|关注|更新|作者|加入|超时|收藏|福利|邀请|好友|失联|(\b(USE|USED|TOTAL|EXPIRE|EMAIL|Panel|Channel|Author|Traffic)(\d+)?\b|(\d{4}-\d{2}-\d{2}|\dG)))).*$
-UrlTest:
-  type: url-test
-  interval: 30
-  tolerance: 30
-  lazy: true
-  url: https://www.gstatic.com/generate_204
-  disable-udp: false
-  timeout: 2000
-  max-failed-times: 3
-  hidden: false
-  include-all-providers: true
-  empty-fallback: REJECT
-FallBack:
-  type: fallback
-  interval: 30
-  lazy: true
-  url: https://www.gstatic.com/generate_204
-  disable-udp: false
-  timeout: 2000
-  max-failed-times: 3
-  hidden: false
-  include-all-providers: true
-  empty-fallback: REJECT
-LoadBalance:
-  type: load-balance
-  interval: 30
-  lazy: true
-  url: https://www.gstatic.com/generate_204
-  disable-udp: false
-  strategy: consistent-hashing
-  timeout: 2000
-  max-failed-times: 3
-  hidden: true
-  include-all-providers: true
-  empty-fallback: REJECT
-RuleProviders:
-  type: http
-  behavior: classical
-  interval: 3600
-  format: yaml
-  proxy: DIRECT
-proxy-groups:
-  - {name: 全部节点, type: select, proxies: [全部自动, 全部故障转移, 全部负载均衡, 美国自动策略, 美国故转, 香港自动策略, 台湾自动策略, 日本自动策略, 韩国自动策略, 新国自动策略, 英国自动策略, 法国自动策略, 德国自动策略, 顶级机场, Kitty, 亏本机场, 赔钱机场, 良心云, 干杯机场]}
-  - {name: C-Proxy, type: select, proxies: [美国自动策略, 美国故转, 香港故转, 香港自动策略, 台湾故转, 日本故转, 韩国故转, 全部负载均衡, 新国故转, 英国故转, 法国故转, 德国故转, 顶级机场, Kitty, 亏本机场, 赔钱机场, 良心云, 干杯机场]}
-  - {type: url-test, interval: 30, tolerance: 30, lazy: true, url: 'https://www.gstatic.com/generate_204', disable-udp: false, timeout: 2000, max-failed-times: 3, hidden: false, include-all-providers: true, empty-fallback: REJECT, name: 全部自动, exclude-filter: 剩余|流量|官网|套餐|到期|游戏}
-  - {type: fallback, interval: 30, lazy: true, url: 'https://www.gstatic.com/generate_204', disable-udp: false, timeout: 2000, max-failed-times: 3, hidden: false, include-all-providers: true, empty-fallback: REJECT, name: 全部故障转移, exclude-filter: 剩余|流量|官网|套餐|到期|游戏}
-  - {type: load-balance, interval: 30, lazy: true, url: 'https://www.gstatic.com/generate_204', disable-udp: false, strategy: consistent-hashing, timeout: 2000, max-failed-times: 3, hidden: true, include-all-providers: true, empty-fallback: REJECT, name: 全部负载均衡, exclude-filter: 剩余|流量|官网|套餐|到期|游戏}
-  - {name: 游戏选择, type: select, include-all-providers: true, filter: '^(?=.*((?i)游戏|🎮|(\b(GAME)(\d+)?\b)))(?!.*((?i)回国|校园)).*$', proxies: [DIRECT, 全球选择]}
-  - {name: 全球选择, type: select, proxies: [兜底后备策略, 全部自动, 全部故障转移, 全部负载均衡, 美国自动策略, 美国故转, 香港自动策略, 台湾自动策略, 日本自动策略, 韩国自动策略, 新国自动策略, 英国自动策略, 法国自动策略, 德国自动策略, 顶级机场, Kitty, 亏本机场, 赔钱机场, 良心云, 干杯机场]}
-  - {name: AI, type: fallback, proxies: [美国自动策略, 日本自动策略, 台湾自动策略, 新国故转, 美国故转]}
-  - {name: 兜底后备策略, type: select, proxies: [DIRECT, 全部节点, 全部负载均衡, 美国自动策略, 美国故转, 香港故转, 香港自动策略, 台湾故转, 日本故转, 韩国故转, 新国故转, 英国故转, 法国故转, 德国故转, 顶级机场, Kitty, 亏本机场, 赔钱机场, 良心云, 干杯机场]}
-  - {name: telegram, type: select, proxies: [全部节点, 美国自动策略, 美国故转, 香港故转, 香港自动策略, 台湾故转, 日本故转, 韩国故转, 新国故转, 英国故转, 法国故转, 德国故转, 顶级机场, Kitty, 亏本机场, 赔钱机场, 亏本机场, 良心云, 干杯机场]}
-  - {name: 干杯机场, type: select, use: [干杯机场], exclude-filter: 剩余|流量|官网|套餐|到期|游戏}
-  - {name: 赔钱机场, type: select, use: [赔钱机场], exclude-filter: 剩余|流量|官网|套餐|到期|游戏}
-  - {name: 亏本机场, type: select, use: [亏本机场], exclude-filter: 剩余|流量|官网|套餐|到期|游戏}
-  - {name: 良心云, type: select, use: [良心云], exclude-filter: 剩余|流量|官网|套餐|到期|游戏, icon: 'https://cdn.jsdelivr.net/gh/Daveccx/ConvertRules@main/icons/liangxin.png'}
-  - {name: Kitty, type: select, use: [Kitty], exclude-filter: 剩余|流量|官网|套餐|到期|游戏|距离下次}
-  - {name: 顶级机场, type: select, use: [顶级机场], exclude-filter: 剩余|流量|官网|套餐|到期|游戏|距离下次}
-  - {type: fallback, interval: 30, lazy: true, url: 'https://www.gstatic.com/generate_204', disable-udp: false, timeout: 2000, max-failed-times: 3, hidden: false, include-all-providers: true, empty-fallback: REJECT, name: 香港故转, filter: '^(?=.*((?i)🇭🇰|香港|(\b(HK|HKG|Hong)(\d+)?\b)))(?!.*((?i)回国|校园|游戏|🎮|(\b(GAME)\b))).*$'}
-  - {type: fallback, interval: 30, lazy: true, url: 'https://www.gstatic.com/generate_204', disable-udp: false, timeout: 2000, max-failed-times: 3, hidden: false, include-all-providers: true, empty-fallback: REJECT, name: 台湾故转, filter: '^(?=.*((?i)🇹🇼|台湾|(\b(TW|TWN|Tai|Taiwan)(\d+)?\b)))(?!.*((?i)回国|校园|游戏|🎮|(\b(GAME)\b))).*$'}
-  - {type: fallback, interval: 30, lazy: true, url: 'https://www.gstatic.com/generate_204', disable-udp: false, timeout: 2000, max-failed-times: 3, hidden: false, include-all-providers: true, empty-fallback: REJECT, name: 日本故转, filter: '^(?=.*((?i)🇯🇵|日本|川日|东京|大阪|泉日|埼玉|(\b(JP|JPN|Japan)(\d+)?\b)))(?!.*((?i)回国|校园|游戏|🎮|(\b(GAME)\b))).*$'}
-  - {type: fallback, interval: 30, lazy: true, url: 'https://www.gstatic.com/generate_204', disable-udp: false, timeout: 2000, max-failed-times: 3, hidden: false, include-all-providers: true, empty-fallback: REJECT, name: 韩国故转, filter: '^(?=.*((?i)🇰🇷|韩国|韓|首尔|(\b(KR|KOR|Korea)(\d+)?\b)))(?!.*((?i)回国|校园|游戏|🎮|(\b(GAME)\b))).*$'}
-  - {type: fallback, interval: 30, lazy: true, url: 'https://www.gstatic.com/generate_204', disable-udp: false, timeout: 2000, max-failed-times: 3, hidden: false, include-all-providers: true, empty-fallback: REJECT, name: 新国故转, filter: '^(?=.*((?i)🇸🇬|新加坡|狮|(\b(SG|SGP|Singapore)(\d+)?\b)))(?!.*((?i)回国|校园|游戏|🎮|(\b(GAME)\b))).*$'}
-  - {type: fallback, interval: 30, lazy: true, url: 'https://www.gstatic.com/generate_204', disable-udp: false, timeout: 2000, max-failed-times: 3, hidden: false, include-all-providers: true, empty-fallback: REJECT, name: 美国故转, filter: '^(?=.*((?i)🇺🇸|美国|波特兰|达拉斯|俄勒冈|凤凰城|费利蒙|硅谷|拉斯维加斯|洛杉矶|圣何塞|圣克拉拉|西雅图|芝加哥|(\b(US|USA|United States)(\d+)?\b)))(?!.*((?i)回国|校园|游戏|🎮|(\b(GAME)\b))).*$'}
-  - {type: fallback, interval: 30, lazy: true, url: 'https://www.gstatic.com/generate_204', disable-udp: false, timeout: 2000, max-failed-times: 3, hidden: false, include-all-providers: true, empty-fallback: REJECT, name: 英国故转, filter: '^(?=.*((?i)🇬🇧|英国|伦敦|(\b(UK|GBR|United Kingdom)(\d+)?\b)))(?!.*((?i)回国|校园|游戏|🎮|(\b(GAME)\b))).*$'}
-  - {type: fallback, interval: 30, lazy: true, url: 'https://www.gstatic.com/generate_204', disable-udp: false, timeout: 2000, max-failed-times: 3, hidden: false, include-all-providers: true, empty-fallback: REJECT, name: 法国故转, filter: '^(?=.*((?i)🇫🇷|法国|(\b(FR|FRA|France)(\d+)?\b)))(?!.*((?i)回国|校园|游戏|🎮|(\b(GAME)\b))).*$'}
-  - {type: fallback, interval: 30, lazy: true, url: 'https://www.gstatic.com/generate_204', disable-udp: false, timeout: 2000, max-failed-times: 3, hidden: false, include-all-providers: true, empty-fallback: REJECT, name: 德国故转, filter: '^(?=.*((?i)🇩🇪|德国|(\b(DE|DEU|Germany)(\d+)?\b)))(?!.*((?i)回国|校园|游戏|🎮|(\b(GAME)\b))).*$'}
-  - {type: url-test, interval: 30, tolerance: 30, lazy: true, url: 'https://www.gstatic.com/generate_204', disable-udp: false, timeout: 2000, max-failed-times: 3, hidden: false, include-all-providers: true, empty-fallback: REJECT, name: 香港自动策略, filter: '^(?=.*((?i)🇭🇰|香港|(\b(HK|HKG|Hong)(\d+)?\b)))(?!.*((?i)回国|校园|游戏|🎮|(\b(GAME)\b))).*$'}
-  - {type: url-test, interval: 30, tolerance: 30, lazy: true, url: 'https://www.gstatic.com/generate_204', disable-udp: false, timeout: 2000, max-failed-times: 3, hidden: false, include-all-providers: true, empty-fallback: REJECT, name: 台湾自动策略, filter: '^(?=.*((?i)🇹🇼|台湾|(\b(TW|TWN|Tai|Taiwan)(\d+)?\b)))(?!.*((?i)回国|校园|游戏|🎮|(\b(GAME)\b))).*$'}
-  - {type: url-test, interval: 30, tolerance: 30, lazy: true, url: 'https://www.gstatic.com/generate_204', disable-udp: false, timeout: 2000, max-failed-times: 3, hidden: false, include-all-providers: true, empty-fallback: REJECT, name: 日本自动策略, filter: '^(?=.*((?i)🇯🇵|日本|川日|东京|大阪|泉日|埼玉|(\b(JP|JPN|Japan)(\d+)?\b)))(?!.*((?i)回国|校园|游戏|🎮|(\b(GAME)\b))).*$'}
-  - {type: url-test, interval: 30, tolerance: 30, lazy: true, url: 'https://www.gstatic.com/generate_204', disable-udp: false, timeout: 2000, max-failed-times: 3, hidden: false, include-all-providers: true, empty-fallback: REJECT, name: 韩国自动策略, filter: '^(?=.*((?i)🇰🇷|韩国|韓|首尔|(\b(KR|KOR|Korea)(\d+)?\b)))(?!.*((?i)回国|校园|游戏|🎮|(\b(GAME)\b))).*$'}
-  - {type: url-test, interval: 30, tolerance: 30, lazy: true, url: 'https://www.gstatic.com/generate_204', disable-udp: false, timeout: 2000, max-failed-times: 3, hidden: false, include-all-providers: true, empty-fallback: REJECT, name: 新国自动策略, filter: '^(?=.*((?i)🇸🇬|新加坡|狮|(\b(SG|SGP|Singapore)(\d+)?\b)))(?!.*((?i)回国|校园|游戏|🎮|(\b(GAME)\b))).*$'}
-  - {type: url-test, interval: 30, tolerance: 30, lazy: true, url: 'https://www.gstatic.com/generate_204', disable-udp: false, timeout: 2000, max-failed-times: 3, hidden: false, include-all-providers: true, empty-fallback: REJECT, name: 美国自动策略, filter: '^(?=.*((?i)🇺🇸|美国|波特兰|达拉斯|俄勒冈|凤凰城|费利蒙|硅谷|拉斯维加斯|洛杉矶|圣何塞|圣克拉拉|西雅图|芝加哥|(\b(US|USA|United States)(\d+)?\b)))(?!.*((?i)回国|校园|游戏|🎮|(\b(GAME)\b))).*$'}
-  - {type: url-test, interval: 30, tolerance: 30, lazy: true, url: 'https://www.gstatic.com/generate_204', disable-udp: false, timeout: 2000, max-failed-times: 3, hidden: false, include-all-providers: true, empty-fallback: REJECT, name: 英国自动策略, filter: '^(?=.*((?i)🇬🇧|英国|伦敦|(\b(UK|GBR|United Kingdom)(\d+)?\b)))(?!.*((?i)回国|校园|游戏|🎮|(\b(GAME)\b))).*$'}
-  - {type: url-test, interval: 30, tolerance: 30, lazy: true, url: 'https://www.gstatic.com/generate_204', disable-udp: false, timeout: 2000, max-failed-times: 3, hidden: false, include-all-providers: true, empty-fallback: REJECT, name: 法国自动策略, filter: '^(?=.*((?i)🇫🇷|法国|(\b(FR|FRA|France)(\d+)?\b)))(?!.*((?i)回国|校园|游戏|🎮|(\b(GAME)\b))).*$'}
-  - {type: url-test, interval: 30, tolerance: 30, lazy: true, url: 'https://www.gstatic.com/generate_204', disable-udp: false, timeout: 2000, max-failed-times: 3, hidden: false, include-all-providers: true, empty-fallback: REJECT, name: 德国自动策略, filter: '^(?=.*((?i)🇩🇪|德国|(\b(DE|DEU|Germany)(\d+)?\b)))(?!.*((?i)回国|校园|游戏|🎮|(\b(GAME)\b))).*$'}
+      
+# 锚点 - 节点筛选组
+FilterHK: &FilterHK '^(?=.*((?i)🇭🇰|香港|(\b(HK|HKG|Hong)(\d+)?\b)))(?!.*((?i)回国|校园|游戏|🎮|(\b(GAME)\b))).*$'
+FilterTW: &FilterTW '^(?=.*((?i)🇹🇼|台湾|(\b(TW|TWN|Tai|Taiwan)(\d+)?\b)))(?!.*((?i)回国|校园|游戏|🎮|(\b(GAME)\b))).*$'
+FilterJP: &FilterJP '^(?=.*((?i)🇯🇵|日本|川日|东京|大阪|泉日|埼玉|(\b(JP|JPN|Japan)(\d+)?\b)))(?!.*((?i)回国|校园|游戏|🎮|(\b(GAME)\b))).*$'
+FilterKR: &FilterKR '^(?=.*((?i)🇰🇷|韩国|韓|首尔|(\b(KR|KOR|Korea)(\d+)?\b)))(?!.*((?i)回国|校园|游戏|🎮|(\b(GAME)\b))).*$'
+FilterSG: &FilterSG '^(?=.*((?i)🇸🇬|新加坡|狮|(\b(SG|SGP|Singapore)(\d+)?\b)))(?!.*((?i)回国|校园|游戏|🎮|(\b(GAME)\b))).*$'
+FilterUS: &FilterUS '^(?=.*((?i)🇺🇸|美国|波特兰|达拉斯|俄勒冈|凤凰城|费利蒙|硅谷|拉斯维加斯|洛杉矶|圣何塞|圣克拉拉|西雅图|芝加哥|(\b(US|USA|United States)(\d+)?\b)))(?!.*((?i)回国|校园|游戏|🎮|(\b(GAME)\b))).*$'
+FilterUK: &FilterUK '^(?=.*((?i)🇬🇧|英国|伦敦|(\b(UK|GBR|United Kingdom)(\d+)?\b)))(?!.*((?i)回国|校园|游戏|🎮|(\b(GAME)\b))).*$'
+FilterFR: &FilterFR '^(?=.*((?i)🇫🇷|法国|(\b(FR|FRA|France)(\d+)?\b)))(?!.*((?i)回国|校园|游戏|🎮|(\b(GAME)\b))).*$'
+FilterDE: &FilterDE '^(?=.*((?i)🇩🇪|德国|(\b(DE|DEU|Germany)(\d+)?\b)))(?!.*((?i)回国|校园|游戏|🎮|(\b(GAME)\b))).*$'
+FilterGame: &FilterGame '^(?=.*((?i)游戏|🎮|(\b(GAME)(\d+)?\b)))(?!.*((?i)回国|校园)).*$'
+FilterAll: &FilterAll '^(?=.*(.))(?!.*((?i)群|邀请|返利|循环|官网|客服|网站|网址|获取|订阅|流量|到期|机场|下次|版本|官址|备用|过期|已用|联系|邮箱|工单|贩卖|通知|倒卖|防止|国内|地址|频道|无法|说明|使用|提示|特别|访问|支持|教程|关注|更新|作者|加入|超时|收藏|福利|邀请|好友|失联|(\b(USE|USED|TOTAL|EXPIRE|EMAIL|Panel|Channel|Author|Traffic)(\d+)?\b|(\d{4}-\d{2}-\d{2}|\dG)))).*$'
+
+# 策略组参数锚点
+# 锚点 - 时延优选参数 [每 30 秒一次惰性健康检查，容差 20ms，时延超过 2 秒判定为失败，失败 3 次则自动触发健康检查]
+UrlTest: &UrlTest {type: url-test, interval: 30, tolerance: 30, lazy: true, url: 'https://www.gstatic.com/generate_204', disable-udp: false, timeout: 2000, max-failed-times: 3, hidden: false, include-all-providers: true, empty-fallback: REJECT}
+# 锚点 - 故障转移参数 [每 6 秒一次惰性健康检查，时延超过 2 秒判定为失败，失败 3 次则自动触发健康检查]
+FallBack: &FallBack {type: fallback, interval: 30, lazy: true, url: 'https://www.gstatic.com/generate_204', disable-udp: false, timeout: 2000, max-failed-times: 3, hidden: false, include-all-providers: true, empty-fallback: REJECT}
+# 锚点 - 负载均衡参数 [每 30 秒一次惰性健康检查，时延超过 2 秒判定为失败，失败 3 次则自动触发健康检查]
+LoadBalance: &LoadBalance {type: load-balance, interval: 30, lazy: true, url: 'https://www.gstatic.com/generate_204', disable-udp: false, strategy: consistent-hashing, timeout: 2000, max-failed-times: 3, hidden: true, include-all-providers: true, empty-fallback: REJECT}
+# 锚点 - 规则参数 [每小时更新一次订阅规则，更新规则时使用直连策略]
+
+# blackmatrix7 classical 规则
+RuleProviders: &RuleProviders {type: http, behavior: classical, interval: 3600, format: yaml, proxy: DIRECT}
+
+# MetaCubeX 域名规则
+DomainProviders: &DomainProviders {type: http, behavior: domain, interval: 3600, format: yaml, proxy: DIRECT}
+
+# MetaCubeX IP 规则
+IpProviders: &IpProviders {type: http, behavior: ipcidr, interval: 86400, format: yaml, proxy: DIRECT}
+
+# 策略组
+proxy-groups: 
+  - {name: 全部节点, type: select, proxies: [全部自动, 全部故障转移, 全部负载均衡, 美国自动策略, 美国故转, 香港自动策略, 台湾自动策略, 日本自动策略, 韩国自动策略, 新国自动策略, 英国自动策略, 法国自动策略, 德国自动策略,顶级机场, Kitty,亏本机场, 赔钱机场, 良心云,干杯机场], icon: 'https://fastly.jsdelivr.net/gh/Orz-3/mini@master/Color/Static.png'}
+  - {name: C-Proxy, type: select, proxies: [美国自动策略, 美国故转, 香港故转, 香港自动策略, 台湾故转, 日本故转, 韩国故转, 全部负载均衡, 新国故转, 英国故转, 法国故转, 德国故转, 顶级机场,Kitty,亏本机场, 赔钱机场, 良心云,干杯机场], icon: 'https://fastly.jsdelivr.net/gh/Orz-3/mini@master/Color/Global.png'}
+  - {name: 全部自动, <<: *UrlTest, exclude-filter: "剩余|流量|官网|套餐|到期|游戏", icon: 'https://fastly.jsdelivr.net/gh/Orz-3/mini@master/Color/Auto.png'}
+  - {name: 全部故障转移, <<: *FallBack, exclude-filter: "剩余|流量|官网|套餐|到期|游戏", icon: 'https://fastly.jsdelivr.net/gh/Orz-3/mini@master/Color/Final.png'}
+  - {name: 全部负载均衡, <<: *LoadBalance, exclude-filter: "剩余|流量|官网|套餐|到期|游戏", icon: 'https://fastly.jsdelivr.net/gh/Orz-3/mini@master/Color/Auto.png'}
+  - {name: 游戏选择, type: select, include-all-providers: true, filter: *FilterGame, proxies: [DIRECT, 全球选择], icon: 'https://fastly.jsdelivr.net/gh/Orz-3/mini@master/Color/GAME.png'}
+  - {name: 全球选择, type: select, proxies: [兜底后备策略, 全部自动, 全部故障转移, 全部负载均衡, 美国自动策略, 美国故转, 香港自动策略, 台湾自动策略, 日本自动策略, 韩国自动策略, 新国自动策略, 英国自动策略, 法国自动策略, 德国自动策略, 顶级机场,Kitty,亏本机场, 赔钱机场,  良心云,干杯机场], icon: 'https://fastly.jsdelivr.net/gh/Orz-3/mini@master/Color/Global.png'}
+  - {name: AI, type: fallback, proxies: [美国自动策略, 日本自动策略, 台湾自动策略, 新国故转, 美国故转], icon: 'https://fastly.jsdelivr.net/gh/Koolson/Qure@master/IconSet/Color/ChatGPT.png'}
+  - {name: 兜底后备策略, type: select, proxies: [DIRECT, 全部节点, 全部负载均衡, 美国自动策略, 美国故转, 香港故转, 香港自动策略, 台湾故转, 日本故转, 韩国故转, 新国故转, 英国故转, 法国故转, 德国故转, 顶级机场,Kitty,亏本机场, 赔钱机场, 良心云,干杯机场], icon: 'https://fastly.jsdelivr.net/gh/Orz-3/mini@master/Color/Final.png'}
+  - {name: telegram, type: select, proxies: [全部节点, 美国自动策略, 美国故转, 香港故转, 香港自动策略, 台湾故转, 日本故转, 韩国故转, 新国故转, 英国故转, 法国故转, 德国故转, 顶级机场,Kitty,亏本机场, 赔钱机场, 亏本机场, 良心云,干杯机场], icon: 'https://fastly.jsdelivr.net/gh/Orz-3/mini@master/Color/Telegram.png'}
+  - {name: 干杯机场, type: select, use: [干杯机场], exclude-filter: "剩余|流量|官网|套餐|到期|游戏", icon: 'https://cdn.jsdelivr.net/gh/Daveccx/ConvertRules@main/icons/ganbei.png'}
+  - {name: 赔钱机场, type: select, use: [赔钱机场], exclude-filter: "剩余|流量|官网|套餐|到期|游戏", icon: 'https://cdn.jsdelivr.net/gh/Daveccx/ConvertRules@main/icons/peiqian.png'}
+  - {name: 亏本机场, type: select, use: [亏本机场], exclude-filter: "剩余|流量|官网|套餐|到期|游戏", icon: 'https://cdn.jsdelivr.net/gh/Daveccx/ConvertRules@main/icons/kuiben.png'}
+  - {name: 良心云, type: select, use: [良心云], exclude-filter: "剩余|流量|官网|套餐|到期|游戏", icon: 'https://cdn.jsdelivr.net/gh/Daveccx/ConvertRules@main/icons/liangxin.png'}
+  - {name: Kitty, type: select, use: [Kitty], exclude-filter: "剩余|流量|官网|套餐|到期|游戏|距离下次", icon: 'https://cdn.jsdelivr.net/gh/Daveccx/ConvertRules@main/icons/kitty.png'}
+  - {name: 顶级机场, type: select, use: [顶级机场], exclude-filter: "剩余|流量|官网|套餐|到期|游戏|距离下次", icon: 'https://cdn.jsdelivr.net/gh/Daveccx/ConvertRules@main/icons/dingji.png'}
+ 
+  - {name: 香港故转, <<: *FallBack, filter: *FilterHK, icon: 'https://fastly.jsdelivr.net/gh/Orz-3/mini@master/Color/HK.png'}
+  - {name: 台湾故转, <<: *FallBack, filter: *FilterTW, icon: 'https://fastly.jsdelivr.net/gh/Orz-3/mini@master/Color/TW.png'}
+  - {name: 日本故转, <<: *FallBack, filter: *FilterJP, icon: 'https://fastly.jsdelivr.net/gh/Orz-3/mini@master/Color/JP.png'}
+  - {name: 韩国故转, <<: *FallBack, filter: *FilterKR, icon: 'https://fastly.jsdelivr.net/gh/Orz-3/mini@master/Color/KR.png'}
+  - {name: 新国故转, <<: *FallBack, filter: *FilterSG, icon: 'https://fastly.jsdelivr.net/gh/Orz-3/mini@master/Color/SG.png'}
+  - {name: 美国故转, <<: *FallBack, filter: *FilterUS, icon: 'https://fastly.jsdelivr.net/gh/Orz-3/mini@master/Color/US.png'}
+  - {name: 英国故转, <<: *FallBack, filter: *FilterUK, icon: 'https://fastly.jsdelivr.net/gh/Orz-3/mini@master/Color/UK.png'}
+  - {name: 法国故转, <<: *FallBack, filter: *FilterFR, icon: 'https://fastly.jsdelivr.net/gh/Orz-3/mini@master/Color/FR.png'}
+  - {name: 德国故转, <<: *FallBack, filter: *FilterDE, icon: 'https://fastly.jsdelivr.net/gh/Orz-3/mini@master/Color/DE.png'}
+  
+  
+
+  - {name: 香港自动策略, <<: *UrlTest, filter: *FilterHK, icon: 'https://fastly.jsdelivr.net/gh/Orz-3/mini@master/Color/HK.png'}
+  - {name: 台湾自动策略, <<: *UrlTest, filter: *FilterTW, icon: 'https://fastly.jsdelivr.net/gh/Orz-3/mini@master/Color/TW.png'}
+  - {name: 日本自动策略, <<: *UrlTest, filter: *FilterJP, icon: 'https://fastly.jsdelivr.net/gh/Orz-3/mini@master/Color/JP.png'}
+  - {name: 韩国自动策略, <<: *UrlTest, filter: *FilterKR, icon: 'https://fastly.jsdelivr.net/gh/Orz-3/mini@master/Color/KR.png'}
+  - {name: 新国自动策略, <<: *UrlTest, filter: *FilterSG, icon: 'https://fastly.jsdelivr.net/gh/Orz-3/mini@master/Color/SG.png'}
+  - {name: 美国自动策略, <<: *UrlTest, filter: *FilterUS, icon: 'https://fastly.jsdelivr.net/gh/Orz-3/mini@master/Color/US.png'}
+  - {name: 英国自动策略, <<: *UrlTest, filter: *FilterUK, icon: 'https://fastly.jsdelivr.net/gh/Orz-3/mini@master/Color/UK.png'}
+  - {name: 法国自动策略, <<: *UrlTest, filter: *FilterFR, icon: 'https://fastly.jsdelivr.net/gh/Orz-3/mini@master/Color/FR.png'}
+  - {name: 德国自动策略, <<: *UrlTest, filter: *FilterDE, icon: 'https://fastly.jsdelivr.net/gh/Orz-3/mini@master/Color/DE.png'}
+
 rule-anchor:
-  local:
-    type: file
-    behavior: classical
-    format: yaml
-    interval: 3600
-  http:
-    type: http
-    behavior: classical
-    format: yaml
-    interval: 3600
+  local: &local { type: file, behavior: classical, format: yaml, interval: 3600 }
+  http: &http { type: http, behavior: classical, format: yaml, interval: 3600 }
+# 订阅规则
 rule-providers:
+   # ===== MetaCubeX 域名规则 =====
   LAN:
-    type: http
-    behavior: classical
-    interval: 3600
-    format: yaml
-    proxy: DIRECT
-    path: ./rules/private.yaml
-    url: https://cdn.jsdelivr.net/gh/Daveccx/ConvertRules@main/rules/private.yaml
-  Direct:
-    type: http
-    behavior: classical
-    interval: 3600
-    format: yaml
-    proxy: DIRECT
-    path: ./rules/direct.yaml
-    url: https://testingcf.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/Direct/Direct.yaml
-  Proxy:
-    type: http
-    behavior: classical
-    interval: 3600
-    format: yaml
-    proxy: DIRECT
-    path: ./rules/proxy.yaml
-    url: https://testingcf.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/Proxy/Proxy.yaml
-  Download:
-    type: http
-    behavior: classical
-    interval: 3600
-    format: yaml
-    proxy: DIRECT
-    path: ./rules/download.yaml
-    url: https://testingcf.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/Download/Download.yaml
+    <<: *DomainProviders
+    path: './rules/private.yaml'
+    url: 'https://cdn.jsdelivr.net/gh/Daveccx/ConvertRules@main/rules/private.yaml'
+
   ChinaMax:
-    type: http
-    behavior: classical
-    interval: 3600
-    format: yaml
-    proxy: DIRECT
-    path: ./rules/cn.yaml
-    url: https://cdn.jsdelivr.net/gh/Daveccx/ConvertRules@main/rules/cn.yaml
+    <<: *DomainProviders
+    path: './rules/cn.yaml'
+    url: 'https://cdn.jsdelivr.net/gh/Daveccx/ConvertRules@main/rules/cn.yaml'
+
   OpenAI:
-    type: http
-    behavior: classical
-    interval: 3600
-    format: yaml
-    proxy: DIRECT
-    path: ./rules/ai.yaml
-    url: https://cdn.jsdelivr.net/gh/Daveccx/ConvertRules@main/rules/ai.yaml
+    <<: *DomainProviders
+    path: './rules/ai.yaml'
+    url: 'https://cdn.jsdelivr.net/gh/Daveccx/ConvertRules@main/rules/ai.yaml'
+
   Gemini:
-    type: http
-    behavior: classical
-    interval: 3600
-    format: yaml
-    proxy: DIRECT
-    path: ./rules/ai.yaml
-    url: https://cdn.jsdelivr.net/gh/Daveccx/ConvertRules@main/rules/ai.yaml
+    <<: *DomainProviders
+    path: './rules/ai.yaml'
+    url: 'https://cdn.jsdelivr.net/gh/Daveccx/ConvertRules@main/rules/ai.yaml'
+
   Claude:
-    type: http
-    behavior: classical
-    interval: 3600
-    format: yaml
-    proxy: DIRECT
-    path: ./rules/ai.yaml
-    url: https://cdn.jsdelivr.net/gh/Daveccx/ConvertRules@main/rules/ai.yaml
+    <<: *DomainProviders
+    path: './rules/ai.yaml'
+    url: 'https://cdn.jsdelivr.net/gh/Daveccx/ConvertRules@main/rules/ai.yaml'
+
   TikTok:
-    type: http
-    behavior: classical
-    interval: 3600
-    format: yaml
-    proxy: DIRECT
-    path: ./rules/tiktok.yaml
-    url: https://cdn.jsdelivr.net/gh/Daveccx/ConvertRules@main/rules/tiktok.yaml
+    <<: *DomainProviders
+    path: './rules/tiktok.yaml'
+    url: 'https://cdn.jsdelivr.net/gh/Daveccx/ConvertRules@main/rules/tiktok.yaml'
+
   Netflix:
-    type: http
-    behavior: classical
-    interval: 3600
-    format: yaml
-    proxy: DIRECT
-    path: ./rules/netflix.yaml
-    url: https://cdn.jsdelivr.net/gh/Daveccx/ConvertRules@main/rules/netflix.yaml
-  Emby:
-    type: http
-    behavior: classical
-    interval: 3600
-    format: yaml
-    proxy: DIRECT
-    path: ./rules/emby.yaml
-    url: https://testingcf.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/Emby/Emby.yaml
+    <<: *DomainProviders
+    path: './rules/netflix.yaml'
+    url: 'https://cdn.jsdelivr.net/gh/Daveccx/ConvertRules@main/rules/netflix.yaml'
+
   YouTube:
-    type: http
-    behavior: classical
-    interval: 3600
-    format: yaml
-    proxy: DIRECT
-    path: ./rules/youtube.yaml
-    url: https://cdn.jsdelivr.net/gh/Daveccx/ConvertRules@main/rules/youtube.yaml
-  Spotify:
-    type: http
-    behavior: classical
-    interval: 3600
-    format: yaml
-    proxy: DIRECT
-    path: ./rules/spotify.yaml
-    url: https://testingcf.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/Spotify/Spotify.yaml
-  Steam:
-    type: http
-    behavior: classical
-    interval: 3600
-    format: yaml
-    proxy: DIRECT
-    path: ./rules/steam.yaml
-    url: https://testingcf.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/Steam/Steam.yaml
+    <<: *DomainProviders
+    path: './rules/youtube.yaml'
+    url: 'https://cdn.jsdelivr.net/gh/Daveccx/ConvertRules@main/rules/youtube.yaml'
+
   Game:
-    type: http
-    behavior: classical
-    interval: 3600
-    format: yaml
-    proxy: DIRECT
-    path: ./rules/game.yaml
-    url: https://cdn.jsdelivr.net/gh/Daveccx/ConvertRules@main/rules/category-games.yaml
+    <<: *DomainProviders
+    path: './rules/game.yaml'
+    url: 'https://cdn.jsdelivr.net/gh/Daveccx/ConvertRules@main/rules/category-games.yaml'
+
   Google:
-    type: http
-    behavior: classical
-    interval: 3600
-    format: yaml
-    proxy: DIRECT
-    path: ./rules/google.yaml
-    url: https://cdn.jsdelivr.net/gh/Daveccx/ConvertRules@main/rules/google.yaml
+    <<: *DomainProviders
+    path: './rules/google.yaml'
+    url: 'https://cdn.jsdelivr.net/gh/Daveccx/ConvertRules@main/rules/google.yaml'
+
   Microsoft:
-    type: http
-    behavior: classical
-    interval: 3600
-    format: yaml
-    proxy: DIRECT
-    path: ./rules/microsoft.yaml
-    url: https://cdn.jsdelivr.net/gh/Daveccx/ConvertRules@main/rules/microsoft.yaml
+    <<: *DomainProviders
+    path: './rules/microsoft.yaml'
+    url: 'https://cdn.jsdelivr.net/gh/Daveccx/ConvertRules@main/rules/microsoft.yaml'
+
   Telegram:
-    type: http
-    behavior: classical
-    interval: 3600
-    format: yaml
-    proxy: DIRECT
-    path: ./rules/telegram.yaml
-    url: https://cdn.jsdelivr.net/gh/Daveccx/ConvertRules@main/rules/telegram.yaml
-  Apple:
-    type: http
-    behavior: classical
-    interval: 3600
-    format: yaml
-    proxy: DIRECT
-    path: ./rules/apple.yaml
-    url: https://testingcf.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/Apple/Apple.yaml
-  AppStore:
-    type: http
-    behavior: classical
-    interval: 3600
-    format: yaml
-    proxy: DIRECT
-    path: ./rules/appstore.yaml
-    url: https://testingcf.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/AppStore/AppStore.yaml
-  TestFlight:
-    type: http
-    behavior: classical
-    interval: 3600
-    format: yaml
-    proxy: DIRECT
-    path: ./rules/testflight.yaml
-    url: https://testingcf.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/TestFlight/TestFlight.yaml
+    <<: *DomainProviders
+    path: './rules/telegram.yaml'
+    url: 'https://cdn.jsdelivr.net/gh/Daveccx/ConvertRules@main/rules/telegram.yaml'
+
   GitHub:
-    type: http
-    behavior: classical
-    interval: 3600
-    format: yaml
-    proxy: DIRECT
-    path: ./rules/github.yaml
-    url: https://cdn.jsdelivr.net/gh/Daveccx/ConvertRules@main/rules/github.yaml
-  Cloudflare:
-    type: http
-    behavior: classical
-    interval: 3600
-    format: yaml
-    proxy: DIRECT
-    path: ./rules/cloudflare.yaml
-    url: https://testingcf.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/Cloudflare/Cloudflare.yaml
-  Speedtest:
-    type: http
-    behavior: classical
-    interval: 3600
-    format: yaml
-    proxy: DIRECT
-    path: ./rules/speedtest.yaml
-    url: https://testingcf.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/Speedtest/Speedtest.yaml
+    <<: *DomainProviders
+    path: './rules/github.yaml'
+    url: 'https://cdn.jsdelivr.net/gh/Daveccx/ConvertRules@main/rules/github.yaml'
+
   iCloudChina:
-    type: http
-    behavior: classical
-    interval: 3600
-    format: yaml
-    proxy: DIRECT
-    path: ./rules/apple-cn.yaml
-    url: https://cdn.jsdelivr.net/gh/Daveccx/ConvertRules@main/rules/apple-cn.yaml
+    <<: *DomainProviders
+    path: './rules/apple-cn.yaml'
+    url: 'https://cdn.jsdelivr.net/gh/Daveccx/ConvertRules@main/rules/apple-cn.yaml'
+
   Private:
-    type: http
-    behavior: classical
-    interval: 3600
-    format: yaml
-    proxy: DIRECT
-    path: ./rules/private.yaml
-    url: https://cdn.jsdelivr.net/gh/Daveccx/ConvertRules@main/rules/private.yaml
+    <<: *DomainProviders
+    path: './rules/private.yaml'
+    url: 'https://cdn.jsdelivr.net/gh/Daveccx/ConvertRules@main/rules/private.yaml'
+
   GeolocationNotCN:
-    type: http
-    behavior: classical
-    interval: 3600
-    format: yaml
-    proxy: DIRECT
-    path: ./rules/not-cn.yaml
-    url: https://cdn.jsdelivr.net/gh/Daveccx/ConvertRules@main/rules/not-cn.yaml
+    <<: *DomainProviders
+    path: './rules/not-cn.yaml'
+    url: 'https://cdn.jsdelivr.net/gh/Daveccx/ConvertRules@main/rules/not-cn.yaml'
+
+  # ===== blackmatrix7 classical 规则 =====
+  Direct:
+    <<: *RuleProviders
+    path: './rules/direct.yaml'
+    url: 'https://testingcf.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/Direct/Direct.yaml'
+
+  Proxy:
+    <<: *RuleProviders
+    path: './rules/proxy.yaml'
+    url: 'https://testingcf.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/Proxy/Proxy.yaml'
+
+  Download:
+    <<: *RuleProviders
+    path: './rules/download.yaml'
+    url: 'https://testingcf.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/Download/Download.yaml'
+
+  Emby:
+    <<: *RuleProviders
+    path: './rules/emby.yaml'
+    url: 'https://testingcf.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/Emby/Emby.yaml'
+
+  Spotify:
+    <<: *RuleProviders
+    path: './rules/spotify.yaml'
+    url: 'https://testingcf.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/Spotify/Spotify.yaml'
+
+  Steam:
+    <<: *RuleProviders
+    path: './rules/steam.yaml'
+    url: 'https://testingcf.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/Steam/Steam.yaml'
+
+  Apple:
+    <<: *RuleProviders
+    path: './rules/apple.yaml'
+    url: 'https://testingcf.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/Apple/Apple.yaml'
+
+  AppStore:
+    <<: *RuleProviders
+    path: './rules/appstore.yaml'
+    url: 'https://testingcf.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/AppStore/AppStore.yaml'
+
+  TestFlight:
+    <<: *RuleProviders
+    path: './rules/testflight.yaml'
+    url: 'https://testingcf.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/TestFlight/TestFlight.yaml'
+
+  Cloudflare:
+    <<: *RuleProviders
+    path: './rules/cloudflare.yaml'
+    url: 'https://testingcf.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/Cloudflare/Cloudflare.yaml'
+
+  Speedtest:
+    <<: *RuleProviders
+    path: './rules/speedtest.yaml'
+    url: 'https://testingcf.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/Speedtest/Speedtest.yaml'
+
+  # ===== MetaCubeX IP 规则 =====
   CN_IP:
-    type: http
-    behavior: ipcidr
-    format: yaml
-    interval: 86400
-    proxy: DIRECT
-    path: ./rules/cn-ip.yaml
-    url: https://cdn.jsdelivr.net/gh/Daveccx/ConvertRules@main/rules/cn-ip.yaml
+    <<: *IpProviders
+    path: './rules/cn-ip.yaml'
+    url: 'https://cdn.jsdelivr.net/gh/Daveccx/ConvertRules@main/rules/cn-ip.yaml'
+
+  # ===== 个人规则 =====
   myProxy_ip:
     type: http
     behavior: classical
     format: yaml
     interval: 3600
     proxy: DIRECT
-    path: ./rules/myProxy_ip.yaml
-    url: https://cdn.jsdelivr.net/gh/Daveccx/ConvertRules@main/rules/myProxy_ip.yaml
+    path: './rules/myProxy_ip.yaml'
+    url: 'https://cdn.jsdelivr.net/gh/Daveccx/ConvertRules@main/rules/myProxy_ip.yaml'
+
   ALan:
     type: http
     behavior: classical
     format: yaml
     interval: 3600
     proxy: DIRECT
-    path: ./rules/ALan.yaml
-    url: https://cdn.jsdelivr.net/gh/Daveccx/ConvertRules@main/rules/ALan.yaml
-rules:
+    path: './rules/ALan.yaml'
+    url: 'https://cdn.jsdelivr.net/gh/Daveccx/ConvertRules@main/rules/ALan.yaml'
 
-- RULE-SET, ALan, DIRECT
-- RULE-SET, myProxy_ip,全球选择
-- RULE-SET, Gemini, AI
-- RULE-SET, OpenAI, AI
-- RULE-SET, Claude, AI
-- RULE-SET, Spotify, 全球选择
-- RULE-SET, YouTube, 全球选择
-- RULE-SET, TikTok, 全球选择
-- RULE-SET, Netflix, 全球选择
-- RULE-SET, Emby, 全球选择
-- RULE-SET, LAN, DIRECT
-- RULE-SET, Private, DIRECT
-- RULE-SET, Direct, DIRECT
-- RULE-SET, Proxy, 全球选择
-- RULE-SET, Download, DIRECT
-- RULE-SET, Steam, 全球选择
-- RULE-SET, Game, 游戏选择
-- RULE-SET, Speedtest, 全球选择
-- RULE-SET, Apple, 全球选择
-- RULE-SET, iCloudChina, DIRECT
-- RULE-SET, AppStore, 全球选择
-- RULE-SET, TestFlight, 全球选择
-- RULE-SET, Microsoft, 全球选择
-- RULE-SET, Google, 全球选择
-- RULE-SET, GitHub, 全球选择
-- RULE-SET, Cloudflare, 全球选择
-- RULE-SET, Telegram, telegram
-- RULE-SET, GeolocationNotCN, 全球选择
-- RULE-SET, ChinaMax, DIRECT
-- RULE-SET, CN_IP, DIRECT, no-resolve
-- MATCH, 兜底后备策略
+# 规则指向
+rules:
+#自定义
+#直连
+  - RULE-SET, ALan, DIRECT
+
+#代理
+  - RULE-SET, myProxy_ip,全球选择
+
+ # AI（走 AI 组）
+  - RULE-SET, Gemini, AI
+  - RULE-SET, OpenAI, AI
+  - RULE-SET, Claude, AI
+
+  # 流媒体
+  - RULE-SET, Spotify, 全球选择
+  - RULE-SET, YouTube, 全球选择
+  - RULE-SET, TikTok, 全球选择
+  - RULE-SET, Netflix, 全球选择
+  - RULE-SET, Emby, 全球选择
+  
+  # 通用
+  - RULE-SET, Telegram, telegram
+  - RULE-SET, LAN, DIRECT
+  - RULE-SET, Private, DIRECT
+  - RULE-SET, Direct, DIRECT
+  - RULE-SET, Proxy, 全球选择
+  - RULE-SET, Download, DIRECT
+  - RULE-SET, Steam, 全球选择
+  - RULE-SET, Game, 游戏选择
+  - RULE-SET, Speedtest, 全球选择
+  - RULE-SET, Apple, 全球选择
+  - RULE-SET, iCloudChina, DIRECT
+  - RULE-SET, AppStore, 全球选择
+  - RULE-SET, TestFlight, 全球选择
+  - RULE-SET, Microsoft, 全球选择
+  - RULE-SET, Google, 全球选择
+  - RULE-SET, GitHub, 全球选择
+  - RULE-SET, Cloudflare, 全球选择
+  - RULE-SET, GeolocationNotCN, 全球选择
+  - RULE-SET, ChinaMax, DIRECT
+  - RULE-SET, CN_IP, DIRECT, no-resolve
+  - MATCH, 兜底后备策略
