@@ -1,8 +1,8 @@
-port: 27892
-socks-port: 27891
-mixed-port: 27890
-redir-port: 27893
-tproxy-port: 27894
+port: 7890
+socks-port: 7891
+mixed-port: 7892
+redir-port: 7893
+tproxy-port: 7894
 
 unified-delay: true
 geodata-mode: false
@@ -14,7 +14,7 @@ find-process-mode: strict
 #global-client-fingerprint: chrome  #`udp: true` 和 `global-client-fingerprint: chrome` 都是废字段
 
 # =================== 局域网访问 ===================
-allow-lan: true
+allow-lan: false
 mode: rule
 log-level: info
 ipv6: false  # 核心开启 IPv6 关闭中
@@ -241,7 +241,6 @@ rule-anchor:
   http: &http { type: http, behavior: classical, format: yaml, interval: 3600 }
 # 订阅规则
 rule-providers:
-    # ===== 基础分流 =====
   LAN:
     <<: *RuleProviders
     path: './rules/private.yaml'
@@ -249,25 +248,24 @@ rule-providers:
 
   Direct:
     <<: *RuleProviders
-    path: './rules/not-cn.yaml'
-    url: 'https://cdn.jsdelivr.net/gh/Daveccx/ConvertRules@main/rules/not-cn.yaml'
+    path: './rules/direct.yaml'
+    url: 'https://testingcf.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/Direct/Direct.yaml'
 
   Proxy:
     <<: *RuleProviders
-    path: './rules/not-cn.yaml'
-    url: 'https://cdn.jsdelivr.net/gh/Daveccx/ConvertRules@main/rules/not-cn.yaml'
+    path: './rules/proxy.yaml'
+    url: 'https://testingcf.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/Proxy/Proxy.yaml'
 
   Download:
     <<: *RuleProviders
-    path: './rules/not-cn.yaml'
-    url: 'https://cdn.jsdelivr.net/gh/Daveccx/ConvertRules@main/rules/not-cn.yaml'
+    path: './rules/download.yaml'
+    url: 'https://testingcf.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/Download/Download.yaml'
 
   ChinaMax:
     <<: *RuleProviders
     path: './rules/cn.yaml'
     url: 'https://cdn.jsdelivr.net/gh/Daveccx/ConvertRules@main/rules/cn.yaml'
 
-  # ===== AI（替代原来单个 AI.yaml）=====
   OpenAI:
     <<: *RuleProviders
     path: './rules/ai.yaml'
@@ -283,7 +281,6 @@ rule-providers:
     path: './rules/ai.yaml'
     url: 'https://cdn.jsdelivr.net/gh/Daveccx/ConvertRules@main/rules/ai.yaml'
 
-  # ===== 流媒体 / 游戏 =====
   TikTok:
     <<: *RuleProviders
     path: './rules/tiktok.yaml'
@@ -296,8 +293,8 @@ rule-providers:
 
   Emby:
     <<: *RuleProviders
-    path: './rules/not-cn.yaml'
-    url: 'https://cdn.jsdelivr.net/gh/Daveccx/ConvertRules@main/rules/not-cn.yaml'
+    path: './rules/emby.yaml'
+    url: 'https://testingcf.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/Emby/Emby.yaml'
 
   YouTube:
     <<: *RuleProviders
@@ -306,20 +303,19 @@ rule-providers:
 
   Spotify:
     <<: *RuleProviders
-    path: './rules/not-cn.yaml'
-    url: 'https://cdn.jsdelivr.net/gh/Daveccx/ConvertRules@main/rules/not-cn.yaml'
+    path: './rules/spotify.yaml'
+    url: 'https://testingcf.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/Spotify/Spotify.yaml'
 
   Steam:
     <<: *RuleProviders
-    path: './rules/not-cn.yaml'
-    url: 'https://cdn.jsdelivr.net/gh/Daveccx/ConvertRules@main/rules/not-cn.yaml'
+    path: './rules/steam.yaml'
+    url: 'https://testingcf.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/Steam/Steam.yaml'
 
   Game:
     <<: *RuleProviders
-    path: './rules/category-games.yaml'
+    path: './rules/game.yaml'
     url: 'https://cdn.jsdelivr.net/gh/Daveccx/ConvertRules@main/rules/category-games.yaml'
 
-  # ===== 大厂服务 =====
   Google:
     <<: *RuleProviders
     path: './rules/google.yaml'
@@ -337,17 +333,17 @@ rule-providers:
 
   Apple:
     <<: *RuleProviders
-    path: './rules/apple-cn.yaml'
+    path: './rules/apple.yaml'
     url: 'https://cdn.jsdelivr.net/gh/Daveccx/ConvertRules@main/rules/apple-cn.yaml'
 
   AppStore:
     <<: *RuleProviders
-    path: './rules/apple-cn.yaml'
+    path: './rules/apple.yaml'
     url: 'https://cdn.jsdelivr.net/gh/Daveccx/ConvertRules@main/rules/apple-cn.yaml'
 
   TestFlight:
     <<: *RuleProviders
-    path: './rules/apple-cn.yaml'
+    path: './rules/apple.yaml'
     url: 'https://cdn.jsdelivr.net/gh/Daveccx/ConvertRules@main/rules/apple-cn.yaml'
 
   GitHub:
@@ -357,18 +353,17 @@ rule-providers:
 
   Cloudflare:
     <<: *RuleProviders
-    path: './rules/not-cn.yaml'
-    url: 'https://cdn.jsdelivr.net/gh/Daveccx/ConvertRules@main/rules/not-cn.yaml'
+    path: './rules/cloudflare.yaml'
+    url: 'https://testingcf.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/Cloudflare/Cloudflare.yaml'
 
   Speedtest:
     <<: *RuleProviders
-    path: './rules/not-cn.yaml'
-    url: 'https://cdn.jsdelivr.net/gh/Daveccx/ConvertRules@main/rules/not-cn.yaml'
+    path: './rules/speedtest.yaml'
+    url: 'https://testingcf.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/Speedtest/Speedtest.yaml'
 
-  # ===== 用 geosite 替代找不到的 kelee 专有集 =====
   iCloudChina:
     <<: *RuleProviders
-    path: './rules/apple-cn.yaml'
+    path: './rules/apple.yaml'
     url: 'https://cdn.jsdelivr.net/gh/Daveccx/ConvertRules@main/rules/apple-cn.yaml'
 
   Private:
@@ -390,7 +385,6 @@ rule-providers:
     path: './rules/cn-ip.yaml'
     url: 'https://cdn.jsdelivr.net/gh/Daveccx/ConvertRules@main/rules/cn-ip.yaml'
 
-  # ===== 你自己的本地规则（保留，这才是"学习"的地方）=====
   myProxy_ip:
     type: http
     behavior: classical
