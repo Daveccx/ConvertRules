@@ -337,17 +337,17 @@ rule-providers:
   Apple:
     <<: *RuleProviders
     path: './rules/apple.yaml'
-    url: 'https://cdn.jsdelivr.net/gh/Daveccx/ConvertRules@main/rules/apple-cn.yaml'
+    url: 'https://testingcf.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/Apple/Apple.yaml'
 
   AppStore:
     <<: *RuleProviders
-    path: './rules/apple.yaml'
-    url: 'https://cdn.jsdelivr.net/gh/Daveccx/ConvertRules@main/rules/apple-cn.yaml'
+    path: './rules/appstore.yaml'
+    url: 'https://testingcf.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/AppStore/AppStore.yaml'
 
   TestFlight:
     <<: *RuleProviders
-    path: './rules/apple.yaml'
-    url: 'https://cdn.jsdelivr.net/gh/Daveccx/ConvertRules@main/rules/apple-cn.yaml'
+    path: './rules/testflight.yaml'
+    url: 'https://testingcf.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/TestFlight/TestFlight.yaml'
 
   GitHub:
     <<: *RuleProviders
@@ -366,7 +366,7 @@ rule-providers:
 
   iCloudChina:
     <<: *RuleProviders
-    path: './rules/apple.yaml'
+    path: './rules/apple-cn.yaml'
     url: 'https://cdn.jsdelivr.net/gh/Daveccx/ConvertRules@main/rules/apple-cn.yaml'
 
   Private:
