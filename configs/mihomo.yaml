@@ -13,6 +13,13 @@ allow-lan: true
 mode: rule
 log-level: info
 ipv6: false
+
+# =================== 控制器 ===================
+external-controller: 0.0.0.0:9090
+secret: "请改成强密码"
+# 如需 Web UI，可取消注释：
+# external-ui: ui
+# external-ui-url: "https://github.com/Zephyruso/zashboard/releases/latest/download/dist-cdn-fonts.zip"
 geox-url:
   mmdb: https://testingcf.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@release/country-lite.mmdb
   asn: https://testingcf.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@release/GeoLite2-ASN.mmdb
