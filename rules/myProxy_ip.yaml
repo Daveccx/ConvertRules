@@ -1,0 +1,42 @@
+
+payload:
+  - DOMAIN-KEYWORD,authcode
+  - DOMAIN-SUFFIX,bangumi.tv
+  - DOMAIN-SUFFIX,bgm.tv
+  - DOMAIN-SUFFIX,bgm.tv
+  - DOMAIN-SUFFIX,chii.in
+  - DOMAIN-SUFFIX,next.bgm.tv/p1
+  - DOMAIN-SUFFIX,api.bgm.tv
+  - DOMAIN-SUFFIX,bgm-status.ry.mk
+  - DOMAIN-SUFFIX,hdhive.com
+  - DOMAIN-SUFFIX,themoviedb.org
+  - DOMAIN-SUFFIX,thetvdb.com
+  - DOMAIN-SUFFIX,fanart.tv
+  - DOMAIN-SUFFIX,pypi.org
+  - DOMAIN-SUFFIX,slack.com
+  - DOMAIN-SUFFIX,dian115.com
+  
+  - DOMAIN-SUFFIX,ads-twitter.com
+  - DOMAIN-SUFFIX,cms-twdigitalassets.com
+  - DOMAIN-SUFFIX,periscope.tv
+  - DOMAIN-SUFFIX,pscp.tv
+  - DOMAIN-SUFFIX,t.co
+  - DOMAIN-SUFFIX,tellapart.com
+  - DOMAIN-SUFFIX,tweetdeck.com
+  - DOMAIN-SUFFIX,twimg.com
+  - DOMAIN-SUFFIX,twitpic.com
+  - DOMAIN-SUFFIX,twitter.biz
+  - DOMAIN-SUFFIX,twitter.com
+  - DOMAIN-SUFFIX,twitter.jp
+  - DOMAIN-SUFFIX,twitter.map.fastly.net
+  - DOMAIN-SUFFIX,twittercommunity.com
+  - DOMAIN-SUFFIX,twitterflightschool.com
+  - DOMAIN-SUFFIX,twitterinc.com
+  - DOMAIN-SUFFIX,twitteroauth.com
+  - DOMAIN-SUFFIX,twitterstat.us
+  - DOMAIN-SUFFIX,twtrdns.net
+  - DOMAIN-SUFFIX,twttr.com
+  - DOMAIN-SUFFIX,twttr.net
+  - DOMAIN-SUFFIX,twvid.com
+  - DOMAIN-SUFFIX,vine.co
+  - DOMAIN-SUFFIX,x.com
