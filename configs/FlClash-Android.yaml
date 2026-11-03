@@ -1,8 +1,5 @@
-# ==========================================================================
 # FlClash · Android
-# 导入：FlClash -> 配置 -> + -> 从文件导入
 # 端口、TUN、DNS、Sniffer、进程模式由 FlClash 界面管理。
-# ==========================================================================
 
 mixed-port: 7890
 unified-delay: true
@@ -821,7 +818,7 @@ rules:
 - RULE-SET, YouTube, 全球选择
 - RULE-SET, TikTok, 全球选择
 - RULE-SET, Netflix, 全球选择
-- RULE-SET, Emby, Emby选择
+- RULE-SET, Emby, 全球选择
 - RULE-SET, LAN, DIRECT
 - RULE-SET, Private, DIRECT
 - RULE-SET, Direct, DIRECT
