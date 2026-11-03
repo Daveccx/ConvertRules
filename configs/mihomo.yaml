@@ -1,0 +1,454 @@
+port: 27892
+socks-port: 27891
+mixed-port: 27890
+redir-port: 27893
+tproxy-port: 27894
+
+unified-delay: true
+geodata-mode: false
+#geodata-loader: standard
+geo-auto-update: true
+geo-update-interval: 24
+tcp-concurrent: true
+find-process-mode: strict
+#global-client-fingerprint: chrome  #`udp: true` 和 `global-client-fingerprint: chrome` 都是废字段
+
+# =================== 局域网访问 ===================
+allow-lan: false
+mode: rule
+log-level: info
+ipv6: false  # 核心开启 IPv6 关闭中
+#udp: true  #`udp: true` 和 `global-client-fingerprint: chrome` 都是废字段
+
+# =================== HTTP/SOCKS 认证 ===================
+
+# =================== 控制器 ===================
+# 公开模板不保存控制器密钥；需要时在客户端本地设置 secret。
+
+# =================== GEO 数据 ===================
+geox-url:
+  mmdb: 'https://cdn.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@release/country.mmdb'
+  asn:  'https://cdn.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@release/GeoLite2-ASN.mmdb'
+
+profile:
+  store-selected: true
+  store-fake-ip: true
+
+# =================== Sniffer ===================
+sniffer:
+  enable: true
+  force-dns-mapping: true
+  parse-pure-ip: true
+  override-destination: true
+  sniff:
+    HTTP:
+      ports: [80, 8080-8880]
+      override-destination: true
+    TLS:
+      ports: [443, 8443]
+    QUIC:
+      ports: [443, 8443]
+  force-domain:
+    - +.v2ex.com
+  skip-domain:
+    - Mijia Cloud
+
+# =================== TUN ===================
+tun:
+  enable: true
+  stack: mixed
+  dns-hijack:
+    - any:53
+  auto-route: true
+  auto-detect-interface: true
+  #inet6-route-address:
+    #- "::/1"
+   # - "8000::/1"
+
+# =================== DNS ===================
+dns:
+  enable: true
+  ipv6: false
+  prefer-h3: true
+  listen: 0.0.0.0:1053
+  enhanced-mode: fake-ip
+  fake-ip-range: 198.18.0.1/16
+  fake-ip-filter:
+    - "*.lan"
+    - "*.local"
+    - localhost
+    - "*.arpa"
+    - "+.msftconnecttest.com"
+    - "+.msftncsi.com"
+    - "+.ntp.org"
+    - pool.ntp.org
+    - "Mijia Cloud"
+    # ↓ 从 PAKO 加进来
+    - "+.weixin.qq.com"
+    - "+.wechat.com"
+    - localhost.ptlogin2.qq.com
+    - localhost.sec.qq.com
+    - localhost.work.weixin.qq.com
+    - time.windows.com
+    - "+.miwifi.com"
+    - "+.mediatek.com"
+    - "+.u-tools.cn"          # 米家/智能家居常见
+    - "+.wpsmail.net"
+    - "+.henzanapp.com"
+    - "+.pconline.com.cn"
+    - "+.steamcontent.com"    # Steam 下载（否则 TUN 下下载走代理很慢）
+    - "+.steampowered.com"
+    - "+.steamserver.net"
+  default-nameserver:
+    - 223.5.5.5
+    - 223.6.6.6
+    - 119.29.29.29
+    - 1.1.1.1
+  nameserver:
+    - https://dns.alidns.com/dns-query
+    - https://doh.pub/dns-query
+    - https://1.1.1.1/dns-query
+    #- https://[2606:4700:4700::1111]/dns-query
+  proxy-server-nameserver:
+    - https://dns.alidns.com/dns-query
+    - https://doh.pub/dns-query
+  direct-nameserver:
+    - 223.5.5.5
+    - 119.29.29.29
+  respect-rules: true
+  use-hosts: true
+  fallback:
+    - https://1.1.1.1/dns-query
+    #- https://[2606:4700:4700::1111]/dns-query
+    - https://dns.google/dns-query
+  fallback-filter:
+    geoip: true
+    geoip-code: CN
+    ipcidr:
+      - 240.0.0.0/4
+
+
+# 锚点 - 节点订阅的参数 [每小时更新一次订阅节点，每 60 秒一次健康检查]
+NodeParam: &NodeParam {type: http, interval: 1800, health-check: {enable: true, url: 'https://www.gstatic.com/generate_204', interval: 30, timeout: 3000, lazy: true}}
+
+# 锚点 - 节点订阅
+proxy-providers: 
+ 
+ 
+  Kitty:
+    url: ''
+    <<: *NodeParam
+    path: './proxy_providers/provider-5.yaml'
+    override:
+      additional-prefix: "[Kitty] " # 为订阅节点添加机场名称前缀
+  良心云:
+    url: ''
+    <<: *NodeParam
+    path: './proxy_providers/provider-1.yaml'
+    override:
+      additional-prefix: "[良心云] " # 为订阅节点添加机场名称前缀
+  干杯机场:
+    url: ''
+    <<: *NodeParam
+    path: './proxy_providers/provider-2.yaml'
+    override:
+      additional-prefix: "[干杯机场] " # 为订阅节点添加机场名称前缀
+  亏本机场:
+    url: ''
+    <<: *NodeParam
+    path: './proxy_providers/provider-3.yaml'
+    override:
+      additional-prefix: "[亏本机场] " # 为订阅节点添加机场名称前缀
+  赔钱机场:
+    url: ''
+    <<: *NodeParam
+    path: './proxy_providers/provider-4.yaml'
+    override:
+      additional-prefix: "[赔钱机场] " # 为订阅节点添加机场名称前缀
+  顶级机场:
+    url: ''
+    <<: *NodeParam
+    path: './proxy_providers/provider-6.yaml'
+    override:
+      additional-prefix: "[顶级机场] " # 为订阅节点添加机场名称前缀
+  
+# 锚点 - 节点筛选组
+FilterHK: &FilterHK '^(?=.*((?i)🇭🇰|香港|(\b(HK|HKG|Hong)(\d+)?\b)))(?!.*((?i)回国|校园|游戏|🎮|(\b(GAME)\b))).*$'
+FilterTW: &FilterTW '^(?=.*((?i)🇹🇼|台湾|(\b(TW|TWN|Tai|Taiwan)(\d+)?\b)))(?!.*((?i)回国|校园|游戏|🎮|(\b(GAME)\b))).*$'
+FilterJP: &FilterJP '^(?=.*((?i)🇯🇵|日本|川日|东京|大阪|泉日|埼玉|(\b(JP|JPN|Japan)(\d+)?\b)))(?!.*((?i)回国|校园|游戏|🎮|(\b(GAME)\b))).*$'
+FilterKR: &FilterKR '^(?=.*((?i)🇰🇷|韩国|韓|首尔|(\b(KR|KOR|Korea)(\d+)?\b)))(?!.*((?i)回国|校园|游戏|🎮|(\b(GAME)\b))).*$'
+FilterSG: &FilterSG '^(?=.*((?i)🇸🇬|新加坡|狮|(\b(SG|SGP|Singapore)(\d+)?\b)))(?!.*((?i)回国|校园|游戏|🎮|(\b(GAME)\b))).*$'
+FilterUS: &FilterUS '^(?=.*((?i)🇺🇸|美国|波特兰|达拉斯|俄勒冈|凤凰城|费利蒙|硅谷|拉斯维加斯|洛杉矶|圣何塞|圣克拉拉|西雅图|芝加哥|(\b(US|USA|United States)(\d+)?\b)))(?!.*((?i)回国|校园|游戏|🎮|(\b(GAME)\b))).*$'
+FilterUK: &FilterUK '^(?=.*((?i)🇬🇧|英国|伦敦|(\b(UK|GBR|United Kingdom)(\d+)?\b)))(?!.*((?i)回国|校园|游戏|🎮|(\b(GAME)\b))).*$'
+FilterFR: &FilterFR '^(?=.*((?i)🇫🇷|法国|(\b(FR|FRA|France)(\d+)?\b)))(?!.*((?i)回国|校园|游戏|🎮|(\b(GAME)\b))).*$'
+FilterDE: &FilterDE '^(?=.*((?i)🇩🇪|德国|(\b(DE|DEU|Germany)(\d+)?\b)))(?!.*((?i)回国|校园|游戏|🎮|(\b(GAME)\b))).*$'
+FilterGame: &FilterGame '^(?=.*((?i)游戏|🎮|(\b(GAME)(\d+)?\b)))(?!.*((?i)回国|校园)).*$'
+FilterAll: &FilterAll '^(?=.*(.))(?!.*((?i)群|邀请|返利|循环|官网|客服|网站|网址|获取|订阅|流量|到期|机场|下次|版本|官址|备用|过期|已用|联系|邮箱|工单|贩卖|通知|倒卖|防止|国内|地址|频道|无法|说明|使用|提示|特别|访问|支持|教程|关注|更新|作者|加入|超时|收藏|福利|邀请|好友|失联|(\b(USE|USED|TOTAL|EXPIRE|EMAIL|Panel|Channel|Author|Traffic)(\d+)?\b|(\d{4}-\d{2}-\d{2}|\dG)))).*$'
+
+# 策略组参数锚点
+# 锚点 - 时延优选参数 [每 30 秒一次惰性健康检查，容差 20ms，时延超过 2 秒判定为失败，失败 3 次则自动触发健康检查]
+UrlTest: &UrlTest {type: url-test, interval: 30, tolerance: 30, lazy: true, url: 'https://www.gstatic.com/generate_204', disable-udp: false, timeout: 2000, max-failed-times: 3, hidden: false, include-all-providers: true, empty-fallback: REJECT}
+# 锚点 - 故障转移参数 [每 6 秒一次惰性健康检查，时延超过 2 秒判定为失败，失败 3 次则自动触发健康检查]
+FallBack: &FallBack {type: fallback, interval: 30, lazy: true, url: 'https://www.gstatic.com/generate_204', disable-udp: false, timeout: 2000, max-failed-times: 3, hidden: false, include-all-providers: true, empty-fallback: REJECT}
+# 锚点 - 负载均衡参数 [每 30 秒一次惰性健康检查，时延超过 2 秒判定为失败，失败 3 次则自动触发健康检查]
+LoadBalance: &LoadBalance {type: load-balance, interval: 30, lazy: true, url: 'https://www.gstatic.com/generate_204', disable-udp: false, strategy: consistent-hashing, timeout: 2000, max-failed-times: 3, hidden: true, include-all-providers: true, empty-fallback: REJECT}
+# 锚点 - 规则参数 [每小时更新一次订阅规则，更新规则时使用直连策略]
+RuleProviders: &RuleProviders {type: http, behavior: classical, interval: 3600, format: yaml, proxy: DIRECT}
+
+# 策略组
+proxy-groups: 
+  - {name: 全部节点, type: select, proxies: [全部自动, 全部故障转移, 全部负载均衡, 美国自动策略, 美国故转, 香港自动策略, 台湾自动策略, 日本自动策略, 韩国自动策略, 新国自动策略, 英国自动策略, 法国自动策略, 德国自动策略,顶级机场, Kitty,亏本机场, 赔钱机场, 良心云,干杯机场]}
+  - {name: C-Proxy, type: select, proxies: [美国自动策略, 美国故转, 香港故转, 香港自动策略, 台湾故转, 日本故转, 韩国故转, 全部负载均衡, 新国故转, 英国故转, 法国故转, 德国故转, 顶级机场,Kitty,亏本机场, 赔钱机场, 良心云,干杯机场]}
+  - {name: 全部自动, <<: *UrlTest, exclude-filter: "剩余|流量|官网|套餐|到期|游戏"}
+  - {name: 全部故障转移, <<: *FallBack, exclude-filter: "剩余|流量|官网|套餐|到期|游戏"}
+  - {name: 全部负载均衡, <<: *LoadBalance, exclude-filter: "剩余|流量|官网|套餐|到期|游戏"}
+  - {name: 游戏选择, type: select, include-all-providers: true, filter: *FilterGame, proxies: [DIRECT, 全球选择]}
+  - {name: 全球选择, type: select, proxies: [兜底后备策略, 全部自动, 全部故障转移, 全部负载均衡, 美国自动策略, 美国故转, 香港自动策略, 台湾自动策略, 日本自动策略, 韩国自动策略, 新国自动策略, 英国自动策略, 法国自动策略, 德国自动策略, 顶级机场,Kitty,亏本机场, 赔钱机场,  良心云,干杯机场]}
+  - {name: AI, type: fallback, proxies: [美国自动策略, 日本自动策略, 台湾自动策略, 新国故转, 美国故转]}
+  - {name: 兜底后备策略, type: select, proxies: [DIRECT, 全部节点, 全部负载均衡, 美国自动策略, 美国故转, 香港故转, 香港自动策略, 台湾故转, 日本故转, 韩国故转, 新国故转, 英国故转, 法国故转, 德国故转, 顶级机场,Kitty,亏本机场, 赔钱机场, 良心云,干杯机场]}
+  - {name: telegram, type: select, proxies: [全部节点, 美国自动策略, 美国故转, 香港故转, 香港自动策略, 台湾故转, 日本故转, 韩国故转, 新国故转, 英国故转, 法国故转, 德国故转, 顶级机场,Kitty,亏本机场, 赔钱机场, 亏本机场, 良心云,干杯机场]}
+  - {name: 干杯机场, type: select, use: [干杯机场], exclude-filter: "剩余|流量|官网|套餐|到期|游戏"}
+  - {name: 赔钱机场, type: select, use: [赔钱机场], exclude-filter: "剩余|流量|官网|套餐|到期|游戏"}
+  - {name: 亏本机场, type: select, use: [亏本机场], exclude-filter: "剩余|流量|官网|套餐|到期|游戏"}
+  - {name: 良心云, type: select, use: [良心云], exclude-filter: "剩余|流量|官网|套餐|到期|游戏"}
+  - {name: Kitty, type: select, use: [Kitty], exclude-filter: "剩余|流量|官网|套餐|到期|游戏|距离下次"}
+  - {name: 顶级机场, type: select, use: [顶级机场], exclude-filter: "剩余|流量|官网|套餐|到期|游戏|距离下次"}
+ 
+  - {name: 香港故转, <<: *FallBack, filter: *FilterHK}
+  - {name: 台湾故转, <<: *FallBack, filter: *FilterTW}
+  - {name: 日本故转, <<: *FallBack, filter: *FilterJP}
+  - {name: 韩国故转, <<: *FallBack, filter: *FilterKR}
+  - {name: 新国故转, <<: *FallBack, filter: *FilterSG}
+  - {name: 美国故转, <<: *FallBack, filter: *FilterUS}
+  - {name: 英国故转, <<: *FallBack, filter: *FilterUK}
+  - {name: 法国故转, <<: *FallBack, filter: *FilterFR}
+  - {name: 德国故转, <<: *FallBack, filter: *FilterDE}
+  
+  
+
+  - {name: 香港自动策略, <<: *UrlTest, filter: *FilterHK}
+  - {name: 台湾自动策略, <<: *UrlTest, filter: *FilterTW}
+  - {name: 日本自动策略, <<: *UrlTest, filter: *FilterJP}
+  - {name: 韩国自动策略, <<: *UrlTest, filter: *FilterKR}
+  - {name: 新国自动策略, <<: *UrlTest, filter: *FilterSG}
+  - {name: 美国自动策略, <<: *UrlTest, filter: *FilterUS}
+  - {name: 英国自动策略, <<: *UrlTest, filter: *FilterUK}
+  - {name: 法国自动策略, <<: *UrlTest, filter: *FilterFR}
+  - {name: 德国自动策略, <<: *UrlTest, filter: *FilterDE}
+
+rule-anchor:
+  local: &local { type: file, behavior: classical, format: yaml, interval: 3600 }
+  http: &http { type: http, behavior: classical, format: yaml, interval: 3600 }
+# 订阅规则
+rule-providers:
+    # ===== 基础分流 =====
+  LAN:
+    <<: *RuleProviders
+    path: './rules/private.yaml'
+    url: 'https://raw.githubusercontent.com/Daveccx/ConvertRules/main/rules/private.yaml'
+
+  Direct:
+    <<: *RuleProviders
+    path: './rules/not-cn.yaml'
+    url: 'https://raw.githubusercontent.com/Daveccx/ConvertRules/main/rules/not-cn.yaml'
+
+  Proxy:
+    <<: *RuleProviders
+    path: './rules/not-cn.yaml'
+    url: 'https://raw.githubusercontent.com/Daveccx/ConvertRules/main/rules/not-cn.yaml'
+
+  Download:
+    <<: *RuleProviders
+    path: './rules/not-cn.yaml'
+    url: 'https://raw.githubusercontent.com/Daveccx/ConvertRules/main/rules/not-cn.yaml'
+
+  ChinaMax:
+    <<: *RuleProviders
+    path: './rules/cn.yaml'
+    url: 'https://raw.githubusercontent.com/Daveccx/ConvertRules/main/rules/cn.yaml'
+
+  # ===== AI（替代原来单个 AI.yaml）=====
+  OpenAI:
+    <<: *RuleProviders
+    path: './rules/ai.yaml'
+    url: 'https://raw.githubusercontent.com/Daveccx/ConvertRules/main/rules/ai.yaml'
+
+  Gemini:
+    <<: *RuleProviders
+    path: './rules/ai.yaml'
+    url: 'https://raw.githubusercontent.com/Daveccx/ConvertRules/main/rules/ai.yaml'
+
+  Claude:
+    <<: *RuleProviders
+    path: './rules/ai.yaml'
+    url: 'https://raw.githubusercontent.com/Daveccx/ConvertRules/main/rules/ai.yaml'
+
+  # ===== 流媒体 / 游戏 =====
+  TikTok:
+    <<: *RuleProviders
+    path: './rules/tiktok.yaml'
+    url: 'https://raw.githubusercontent.com/Daveccx/ConvertRules/main/rules/tiktok.yaml'
+
+  Netflix:
+    <<: *RuleProviders
+    path: './rules/netflix.yaml'
+    url: 'https://raw.githubusercontent.com/Daveccx/ConvertRules/main/rules/netflix.yaml'
+
+  Emby:
+    <<: *RuleProviders
+    path: './rules/not-cn.yaml'
+    url: 'https://raw.githubusercontent.com/Daveccx/ConvertRules/main/rules/not-cn.yaml'
+
+  YouTube:
+    <<: *RuleProviders
+    path: './rules/youtube.yaml'
+    url: 'https://raw.githubusercontent.com/Daveccx/ConvertRules/main/rules/youtube.yaml'
+
+  Spotify:
+    <<: *RuleProviders
+    path: './rules/not-cn.yaml'
+    url: 'https://raw.githubusercontent.com/Daveccx/ConvertRules/main/rules/not-cn.yaml'
+
+  Steam:
+    <<: *RuleProviders
+    path: './rules/not-cn.yaml'
+    url: 'https://raw.githubusercontent.com/Daveccx/ConvertRules/main/rules/not-cn.yaml'
+
+  Game:
+    <<: *RuleProviders
+    path: './rules/category-games.yaml'
+    url: 'https://raw.githubusercontent.com/Daveccx/ConvertRules/main/rules/category-games.yaml'
+
+  # ===== 大厂服务 =====
+  Google:
+    <<: *RuleProviders
+    path: './rules/google.yaml'
+    url: 'https://raw.githubusercontent.com/Daveccx/ConvertRules/main/rules/google.yaml'
+
+  Microsoft:
+    <<: *RuleProviders
+    path: './rules/microsoft.yaml'
+    url: 'https://raw.githubusercontent.com/Daveccx/ConvertRules/main/rules/microsoft.yaml'
+
+  Telegram:
+    <<: *RuleProviders
+    path: './rules/telegram.yaml'
+    url: 'https://raw.githubusercontent.com/Daveccx/ConvertRules/main/rules/telegram.yaml'
+
+  Apple:
+    <<: *RuleProviders
+    path: './rules/apple-cn.yaml'
+    url: 'https://raw.githubusercontent.com/Daveccx/ConvertRules/main/rules/apple-cn.yaml'
+
+  AppStore:
+    <<: *RuleProviders
+    path: './rules/apple-cn.yaml'
+    url: 'https://raw.githubusercontent.com/Daveccx/ConvertRules/main/rules/apple-cn.yaml'
+
+  TestFlight:
+    <<: *RuleProviders
+    path: './rules/apple-cn.yaml'
+    url: 'https://raw.githubusercontent.com/Daveccx/ConvertRules/main/rules/apple-cn.yaml'
+
+  GitHub:
+    <<: *RuleProviders
+    path: './rules/github.yaml'
+    url: 'https://raw.githubusercontent.com/Daveccx/ConvertRules/main/rules/github.yaml'
+
+  Cloudflare:
+    <<: *RuleProviders
+    path: './rules/not-cn.yaml'
+    url: 'https://raw.githubusercontent.com/Daveccx/ConvertRules/main/rules/not-cn.yaml'
+
+  Speedtest:
+    <<: *RuleProviders
+    path: './rules/not-cn.yaml'
+    url: 'https://raw.githubusercontent.com/Daveccx/ConvertRules/main/rules/not-cn.yaml'
+
+  # ===== 用 geosite 替代找不到的 kelee 专有集 =====
+  iCloudChina:
+    <<: *RuleProviders
+    path: './rules/apple-cn.yaml'
+    url: 'https://raw.githubusercontent.com/Daveccx/ConvertRules/main/rules/apple-cn.yaml'
+
+  Private:
+    <<: *RuleProviders
+    path: './rules/private.yaml'
+    url: 'https://raw.githubusercontent.com/Daveccx/ConvertRules/main/rules/private.yaml'
+
+  GeolocationNotCN:
+    <<: *RuleProviders
+    path: './rules/not-cn.yaml'
+    url: 'https://raw.githubusercontent.com/Daveccx/ConvertRules/main/rules/not-cn.yaml'
+
+  CN_IP:
+    type: http
+    behavior: ipcidr
+    format: yaml
+    interval: 86400
+    proxy: DIRECT
+    path: './rules/cn-ip.yaml'
+    url: 'https://raw.githubusercontent.com/Daveccx/ConvertRules/main/rules/cn-ip.yaml'
+
+  # ===== 你自己的本地规则（保留，这才是"学习"的地方）=====
+  myProxy_ip:
+    type: http
+    behavior: classical
+    format: yaml
+    interval: 3600
+    proxy: DIRECT
+    path: './rules/myProxy_ip.yaml'
+    url: 'https://raw.githubusercontent.com/Daveccx/ConvertRules/main/rules/myProxy_ip.yaml'
+
+  ALan:
+    type: http
+    behavior: classical
+    format: yaml
+    interval: 3600
+    proxy: DIRECT
+    path: './rules/ALan.yaml'
+    url: 'https://raw.githubusercontent.com/Daveccx/ConvertRules/main/rules/ALan.yaml'
+
+# 规则指向
+rules:
+#自定义
+#直连
+  - RULE-SET, ALan, DIRECT
+
+#代理
+  - RULE-SET, myProxy_ip,全球选择
+
+ # AI（走 AI 组）
+  - RULE-SET, Gemini, AI
+  - RULE-SET, OpenAI, AI
+  - RULE-SET, Claude, AI
+
+  # 流媒体
+  - RULE-SET, Spotify, 全球选择
+  - RULE-SET, YouTube, 全球选择
+  - RULE-SET, TikTok, 全球选择
+  - RULE-SET, Netflix, 全球选择
+  - RULE-SET, Emby, 全球选择
+
+  # 通用
+  - RULE-SET, LAN, DIRECT
+  - RULE-SET, Private, DIRECT
+  - RULE-SET, Direct, DIRECT
+  - RULE-SET, Proxy, 全球选择
+  - RULE-SET, Download, DIRECT
+  - RULE-SET, Steam, 全球选择
+  - RULE-SET, Game, 游戏选择
+  - RULE-SET, Speedtest, 全球选择
+  - RULE-SET, Apple, DIRECT
+  - RULE-SET, iCloudChina, DIRECT
+  - RULE-SET, AppStore, 全球选择
+  - RULE-SET, TestFlight, 全球选择
+  - RULE-SET, Microsoft, 全球选择
+  - RULE-SET, Google, 全球选择
+  - RULE-SET, GitHub, 全球选择
+  - RULE-SET, Cloudflare, 全球选择
+  - RULE-SET, Telegram, telegram
+  - RULE-SET, GeolocationNotCN, 全球选择
+  - RULE-SET, ChinaMax, DIRECT
+  - GEOIP, CN, DIRECT
+  - MATCH, 全球选择
