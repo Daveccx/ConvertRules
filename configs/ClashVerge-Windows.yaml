@@ -1,8 +1,5 @@
-# ==========================================================================
 # Clash Verge Rev · Windows
-# 导入：Clash Verge -> 配置 -> 新建 -> 本地 -> 导入本文件
-# 端口、TUN、DNS、Sniffer 由 Verge 界面管理；本文件只保留规则与策略。
-# ==========================================================================
+# 端口、TUN、DNS、Sniffer 由 Verge 界面管理。
 
 unified-delay: true
 geo-auto-update: false
@@ -819,7 +816,7 @@ rules:
 - RULE-SET, YouTube, 全球选择
 - RULE-SET, TikTok, 全球选择
 - RULE-SET, Netflix, 全球选择
-- RULE-SET, Emby, Emby选择
+- RULE-SET, Emby, 全球选择
 - RULE-SET, LAN, DIRECT
 - RULE-SET, Private, DIRECT
 - RULE-SET, Direct, DIRECT
