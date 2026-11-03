@@ -23,8 +23,8 @@ Daveccx 的 mihomo 配置与规则集。公开仓库中不保存订阅链接、�
 Raw URL：
 
 ```text
-https://raw.githubusercontent.com/Daveccx/ConvertRules/main/rules/ALan.yaml
-https://raw.githubusercontent.com/Daveccx/ConvertRules/main/rules/myProxy_ip.yaml
+https://cdn.jsdelivr.net/gh/Daveccx/ConvertRules@main/rules/ALan.yaml
+https://cdn.jsdelivr.net/gh/Daveccx/ConvertRules@main/rules/myProxy_ip.yaml
 ```
 
 ## 安全
