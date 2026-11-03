@@ -30,5 +30,6 @@ https://raw.githubusercontent.com/Daveccx/ConvertRules/main/rules/myProxy_ip.yam
 ## 安全
 
 - 不要向本仓库提交真实订阅、节点、token、密码或 `secret`。
-- 模板默认 `allow-lan: false`，且不含 `external-controller`。
+- `mihomo.yaml` 按要求使用 `allow-lan: true`，公开模板不含认证；请仅在本机填写 `authentication`，不用局域网代理时改回 `false`。
+- 所有模板都不含 `external-controller` 和 `secret`。
 - 如果订阅已经泄露，请在订阅服务商处重置链接，而不只是从仓库删除文本。
