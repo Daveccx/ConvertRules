@@ -7,7 +7,7 @@
 # 相对路径说明：./proxy_providers/ 与 ./rules/ 位于「内核配置目录」，
 #             各客户端的目录位置见下方说明，找不到会自动重建缓存目录。
 # ==========================================================================
-mixed-port: 27890
+mixed-port: 7890
 unified-delay: true
 geodata-mode: false
 #geodata-loader: standard
@@ -238,137 +238,137 @@ rule-providers:
   LAN:
     <<: *RuleProviders
     path: './rules/private.yaml'
-    url: 'https://raw.githubusercontent.com/Daveccx/ConvertRules/main/rules/private.yaml'
+    url: 'https://cdn.jsdelivr.net/gh/Daveccx/ConvertRules@main/rules/private.yaml'
 
   Direct:
     <<: *RuleProviders
-    path: './rules/not-cn.yaml'
-    url: 'https://raw.githubusercontent.com/Daveccx/ConvertRules/main/rules/not-cn.yaml'
+    path: './rules/direct.yaml'
+    url: 'https://testingcf.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/Direct/Direct.yaml'
 
   Proxy:
     <<: *RuleProviders
-    path: './rules/not-cn.yaml'
-    url: 'https://raw.githubusercontent.com/Daveccx/ConvertRules/main/rules/not-cn.yaml'
+    path: './rules/proxy.yaml'
+    url: 'https://testingcf.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/Proxy/Proxy.yaml'
 
   Download:
     <<: *RuleProviders
-    path: './rules/not-cn.yaml'
-    url: 'https://raw.githubusercontent.com/Daveccx/ConvertRules/main/rules/not-cn.yaml'
+    path: './rules/download.yaml'
+    url: 'https://testingcf.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/Download/Download.yaml'
 
   ChinaMax:
     <<: *RuleProviders
     path: './rules/cn.yaml'
-    url: 'https://raw.githubusercontent.com/Daveccx/ConvertRules/main/rules/cn.yaml'
+    url: 'https://cdn.jsdelivr.net/gh/Daveccx/ConvertRules@main/rules/cn.yaml'
 
   OpenAI:
     <<: *RuleProviders
     path: './rules/ai.yaml'
-    url: 'https://raw.githubusercontent.com/Daveccx/ConvertRules/main/rules/ai.yaml'
+    url: 'https://cdn.jsdelivr.net/gh/Daveccx/ConvertRules@main/rules/ai.yaml'
 
   Gemini:
     <<: *RuleProviders
     path: './rules/ai.yaml'
-    url: 'https://raw.githubusercontent.com/Daveccx/ConvertRules/main/rules/ai.yaml'
+    url: 'https://cdn.jsdelivr.net/gh/Daveccx/ConvertRules@main/rules/ai.yaml'
 
   Claude:
     <<: *RuleProviders
     path: './rules/ai.yaml'
-    url: 'https://raw.githubusercontent.com/Daveccx/ConvertRules/main/rules/ai.yaml'
+    url: 'https://cdn.jsdelivr.net/gh/Daveccx/ConvertRules@main/rules/ai.yaml'
 
   TikTok:
     <<: *RuleProviders
     path: './rules/tiktok.yaml'
-    url: 'https://raw.githubusercontent.com/Daveccx/ConvertRules/main/rules/tiktok.yaml'
+    url: 'https://cdn.jsdelivr.net/gh/Daveccx/ConvertRules@main/rules/tiktok.yaml'
 
   Netflix:
     <<: *RuleProviders
     path: './rules/netflix.yaml'
-    url: 'https://raw.githubusercontent.com/Daveccx/ConvertRules/main/rules/netflix.yaml'
+    url: 'https://cdn.jsdelivr.net/gh/Daveccx/ConvertRules@main/rules/netflix.yaml'
 
   Emby:
     <<: *RuleProviders
-    path: './rules/not-cn.yaml'
-    url: 'https://raw.githubusercontent.com/Daveccx/ConvertRules/main/rules/not-cn.yaml'
+    path: './rules/emby.yaml'
+    url: 'https://testingcf.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/Emby/Emby.yaml'
 
   YouTube:
     <<: *RuleProviders
     path: './rules/youtube.yaml'
-    url: 'https://raw.githubusercontent.com/Daveccx/ConvertRules/main/rules/youtube.yaml'
+    url: 'https://cdn.jsdelivr.net/gh/Daveccx/ConvertRules@main/rules/youtube.yaml'
 
   Spotify:
     <<: *RuleProviders
-    path: './rules/not-cn.yaml'
-    url: 'https://raw.githubusercontent.com/Daveccx/ConvertRules/main/rules/not-cn.yaml'
+    path: './rules/spotify.yaml'
+    url: 'https://testingcf.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/Spotify/Spotify.yaml'
 
   Steam:
     <<: *RuleProviders
-    path: './rules/not-cn.yaml'
-    url: 'https://raw.githubusercontent.com/Daveccx/ConvertRules/main/rules/not-cn.yaml'
+    path: './rules/steam.yaml'
+    url: 'https://testingcf.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/Steam/Steam.yaml'
 
   Game:
     <<: *RuleProviders
-    path: './rules/category-games.yaml'
-    url: 'https://raw.githubusercontent.com/Daveccx/ConvertRules/main/rules/category-games.yaml'
+    path: './rules/game.yaml'
+    url: 'https://cdn.jsdelivr.net/gh/Daveccx/ConvertRules@main/rules/category-games.yaml'
 
   Google:
     <<: *RuleProviders
     path: './rules/google.yaml'
-    url: 'https://raw.githubusercontent.com/Daveccx/ConvertRules/main/rules/google.yaml'
+    url: 'https://cdn.jsdelivr.net/gh/Daveccx/ConvertRules@main/rules/google.yaml'
 
   Microsoft:
     <<: *RuleProviders
     path: './rules/microsoft.yaml'
-    url: 'https://raw.githubusercontent.com/Daveccx/ConvertRules/main/rules/microsoft.yaml'
+    url: 'https://cdn.jsdelivr.net/gh/Daveccx/ConvertRules@main/rules/microsoft.yaml'
 
   Telegram:
     <<: *RuleProviders
     path: './rules/telegram.yaml'
-    url: 'https://raw.githubusercontent.com/Daveccx/ConvertRules/main/rules/telegram.yaml'
+    url: 'https://cdn.jsdelivr.net/gh/Daveccx/ConvertRules@main/rules/telegram.yaml'
 
   Apple:
     <<: *RuleProviders
-    path: './rules/apple-cn.yaml'
-    url: 'https://raw.githubusercontent.com/Daveccx/ConvertRules/main/rules/apple-cn.yaml'
+    path: './rules/apple.yaml'
+    url: 'https://cdn.jsdelivr.net/gh/Daveccx/ConvertRules@main/rules/apple-cn.yaml'
 
   AppStore:
     <<: *RuleProviders
-    path: './rules/apple-cn.yaml'
-    url: 'https://raw.githubusercontent.com/Daveccx/ConvertRules/main/rules/apple-cn.yaml'
+    path: './rules/apple.yaml'
+    url: 'https://cdn.jsdelivr.net/gh/Daveccx/ConvertRules@main/rules/apple-cn.yaml'
 
   TestFlight:
     <<: *RuleProviders
-    path: './rules/apple-cn.yaml'
-    url: 'https://raw.githubusercontent.com/Daveccx/ConvertRules/main/rules/apple-cn.yaml'
+    path: './rules/apple.yaml'
+    url: 'https://cdn.jsdelivr.net/gh/Daveccx/ConvertRules@main/rules/apple-cn.yaml'
 
   GitHub:
     <<: *RuleProviders
     path: './rules/github.yaml'
-    url: 'https://raw.githubusercontent.com/Daveccx/ConvertRules/main/rules/github.yaml'
+    url: 'https://cdn.jsdelivr.net/gh/Daveccx/ConvertRules@main/rules/github.yaml'
 
   Cloudflare:
     <<: *RuleProviders
-    path: './rules/not-cn.yaml'
-    url: 'https://raw.githubusercontent.com/Daveccx/ConvertRules/main/rules/not-cn.yaml'
+    path: './rules/cloudflare.yaml'
+    url: 'https://testingcf.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/Cloudflare/Cloudflare.yaml'
 
   Speedtest:
     <<: *RuleProviders
-    path: './rules/not-cn.yaml'
-    url: 'https://raw.githubusercontent.com/Daveccx/ConvertRules/main/rules/not-cn.yaml'
+    path: './rules/speedtest.yaml'
+    url: 'https://testingcf.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/Speedtest/Speedtest.yaml'
 
   iCloudChina:
     <<: *RuleProviders
-    path: './rules/apple-cn.yaml'
-    url: 'https://raw.githubusercontent.com/Daveccx/ConvertRules/main/rules/apple-cn.yaml'
+    path: './rules/apple.yaml'
+    url: 'https://cdn.jsdelivr.net/gh/Daveccx/ConvertRules@main/rules/apple-cn.yaml'
 
   Private:
     <<: *RuleProviders
     path: './rules/private.yaml'
-    url: 'https://raw.githubusercontent.com/Daveccx/ConvertRules/main/rules/private.yaml'
+    url: 'https://cdn.jsdelivr.net/gh/Daveccx/ConvertRules@main/rules/private.yaml'
 
   GeolocationNotCN:
     <<: *RuleProviders
     path: './rules/not-cn.yaml'
-    url: 'https://raw.githubusercontent.com/Daveccx/ConvertRules/main/rules/not-cn.yaml'
+    url: 'https://cdn.jsdelivr.net/gh/Daveccx/ConvertRules@main/rules/not-cn.yaml'
 
   CN_IP:
     type: http
@@ -377,7 +377,7 @@ rule-providers:
     interval: 86400
     proxy: DIRECT
     path: './rules/cn-ip.yaml'
-    url: 'https://raw.githubusercontent.com/Daveccx/ConvertRules/main/rules/cn-ip.yaml'
+    url: 'https://cdn.jsdelivr.net/gh/Daveccx/ConvertRules@main/rules/cn-ip.yaml'
 
   myProxy_ip:
     type: http
@@ -386,7 +386,7 @@ rule-providers:
     interval: 3600
     proxy: DIRECT
     path: './rules/myProxy_ip.yaml'
-    url: 'https://raw.githubusercontent.com/Daveccx/ConvertRules/main/rules/myProxy_ip.yaml'
+    url: 'https://cdn.jsdelivr.net/gh/Daveccx/ConvertRules@main/rules/myProxy_ip.yaml'
 
   ALan:
     type: http
@@ -395,8 +395,7 @@ rule-providers:
     interval: 3600
     proxy: DIRECT
     path: './rules/ALan.yaml'
-    url: 'https://raw.githubusercontent.com/Daveccx/ConvertRules/main/rules/ALan.yaml'
-
+    url: 'https://cdn.jsdelivr.net/gh/Daveccx/ConvertRules@main/rules/ALan.yaml'
 
 # 规则指向
 rules:
