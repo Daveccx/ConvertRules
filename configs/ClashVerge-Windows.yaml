@@ -419,8 +419,7 @@ rule-providers:
     path: ./rules/ALan.yaml
     url: https://cdn.jsdelivr.net/gh/Daveccx/ConvertRules@main/rules/ALan.yaml
 rules:
-- AND,((DOMAIN,davea.de5.net),(DST-PORT,443)),全球选择
-- DOMAIN-SUFFIX,de5.net,DIRECT
+
 - RULE-SET, ALan, DIRECT
 - RULE-SET, myProxy_ip,全球选择
 - RULE-SET, Gemini, AI
