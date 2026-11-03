@@ -1,5 +1,4 @@
 # Clash Meta / CMFA · Android
-# 端口、DNS、TUN 由客户端界面管理。
 
 mixed-port: 7890
 unified-delay: true
@@ -10,6 +9,19 @@ allow-lan: true
 mode: rule
 log-level: info
 ipv6: false
+
+# =================== HTTP/SOCKS 认证（可选） ===================
+# 需要局域网共享且要求认证时，删除以下两段前的 #。
+# authentication:
+#   - "admin:请改成强密码"
+# skip-auth-prefixes:
+#   - "127.0.0.0/8"
+#   - "10.0.0.0/8"
+#   - "172.16.0.0/12"
+#   - "192.168.0.0/16"
+# 说明：本机、localhost、内网网段免认证；外网设备必须认证。
+# FlClash 注意：若启用 authentication，FlClash 可能清空 skip-auth-prefixes，
+# 导致本机访问也要求认证。仅在确实需要局域网共享时启用。
 profile:
   store-selected: true
   store-fake-ip: true
@@ -290,17 +302,6 @@ proxy-groups:
   - 赔钱机场
   - 良心云
   - 干杯机场
-- name: Emby选择
-  type: select
-  proxies:
-  - DIRECT
-  - 全球选择
-  - 香港自动策略
-  - 台湾自动策略
-  - 日本自动策略
-  - 新国自动策略
-  - 美国自动策略
-  icon: https://fastly.jsdelivr.net/gh/Orz-3/mini@master/Color/Vpn.png
 - name: AI
   type: fallback
   proxies:
@@ -374,7 +375,6 @@ proxy-groups:
   use:
   - 良心云
   exclude-filter: 剩余|流量|官网|套餐|到期|游戏
-  icon: https://cdn.jsdelivr.net/gh/Daveccx/ConvertRules@main/icons/liangxin.png
 - name: Kitty
   type: select
   use:
