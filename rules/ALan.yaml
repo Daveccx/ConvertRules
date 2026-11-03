@@ -13,4 +13,4 @@ payload:
   - DOMAIN,1236999.xyz
   - IP-CIDR,218.244.145.41/32,DIRECT,no-resolve
   - IP-CIDR,218.244.145.45/32,DIRECT,no-resolve
-  - DOMAIN,de5.net
+  - DOMAIN-SUFFIX,davea.de5.net
