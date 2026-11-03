@@ -11,6 +11,6 @@ payload:
   - IP-CIDR6,fe80::/10,no-resolve
   - IP-CIDR6,::1/128,no-resolve
   - DOMAIN,1236999.xyz
-  - DOMAIN,218.244.145.41
-  - DOMAIN,218.244.145.45
+  - IP-CIDR,218.244.145.41/32,DIRECT,no-resolve
+  - IP-CIDR,218.244.145.45/32,DIRECT,no-resolve
   - DOMAIN,de5.net
