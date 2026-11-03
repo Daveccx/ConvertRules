@@ -7,6 +7,17 @@ tcp-concurrent: true
 mode: rule
 log-level: info
 ipv6: false
+
+# =================== HTTP/SOCKS 认证（可选） ===================
+# 需要局域网共享且要求认证时，删除以下两段前的 #。
+# authentication:
+#   - "admin:请改成强密码"
+# skip-auth-prefixes:
+#   - "127.0.0.0/8"
+#   - "10.0.0.0/8"
+#   - "172.16.0.0/12"
+#   - "192.168.0.0/16"
+# 说明：本机、localhost、内网网段免认证；外网设备必须认证。
 profile:
   store-selected: true
   store-fake-ip: true
@@ -121,426 +132,40 @@ RuleProviders:
   format: yaml
   proxy: DIRECT
 proxy-groups:
-- name: 全部节点
-  type: select
-  proxies:
-  - 全部自动
-  - 全部故障转移
-  - 全部负载均衡
-  - 美国自动策略
-  - 美国故转
-  - 香港自动策略
-  - 台湾自动策略
-  - 日本自动策略
-  - 韩国自动策略
-  - 新国自动策略
-  - 英国自动策略
-  - 法国自动策略
-  - 德国自动策略
-  - 顶级机场
-  - Kitty
-  - 亏本机场
-  - 赔钱机场
-  - 良心云
-  - 干杯机场
-- name: C-Proxy
-  type: select
-  proxies:
-  - 美国自动策略
-  - 美国故转
-  - 香港故转
-  - 香港自动策略
-  - 台湾故转
-  - 日本故转
-  - 韩国故转
-  - 全部负载均衡
-  - 新国故转
-  - 英国故转
-  - 法国故转
-  - 德国故转
-  - 顶级机场
-  - Kitty
-  - 亏本机场
-  - 赔钱机场
-  - 良心云
-  - 干杯机场
-- type: url-test
-  interval: 30
-  tolerance: 30
-  lazy: true
-  url: https://www.gstatic.com/generate_204
-  disable-udp: false
-  timeout: 2000
-  max-failed-times: 3
-  hidden: false
-  include-all-providers: true
-  empty-fallback: REJECT
-  name: 全部自动
-  exclude-filter: 剩余|流量|官网|套餐|到期|游戏
-- type: fallback
-  interval: 30
-  lazy: true
-  url: https://www.gstatic.com/generate_204
-  disable-udp: false
-  timeout: 2000
-  max-failed-times: 3
-  hidden: false
-  include-all-providers: true
-  empty-fallback: REJECT
-  name: 全部故障转移
-  exclude-filter: 剩余|流量|官网|套餐|到期|游戏
-- type: load-balance
-  interval: 30
-  lazy: true
-  url: https://www.gstatic.com/generate_204
-  disable-udp: false
-  strategy: consistent-hashing
-  timeout: 2000
-  max-failed-times: 3
-  hidden: true
-  include-all-providers: true
-  empty-fallback: REJECT
-  name: 全部负载均衡
-  exclude-filter: 剩余|流量|官网|套餐|到期|游戏
-- name: 游戏选择
-  type: select
-  include-all-providers: true
-  filter: ^(?=.*((?i)游戏|🎮|(\b(GAME)(\d+)?\b)))(?!.*((?i)回国|校园)).*$
-  proxies:
-  - DIRECT
-  - 全球选择
-- name: 全球选择
-  type: select
-  proxies:
-  - 兜底后备策略
-  - 全部自动
-  - 全部故障转移
-  - 全部负载均衡
-  - 美国自动策略
-  - 美国故转
-  - 香港自动策略
-  - 台湾自动策略
-  - 日本自动策略
-  - 韩国自动策略
-  - 新国自动策略
-  - 英国自动策略
-  - 法国自动策略
-  - 德国自动策略
-  - 顶级机场
-  - Kitty
-  - 亏本机场
-  - 赔钱机场
-  - 良心云
-  - 干杯机场
-- name: AI
-  type: fallback
-  proxies:
-  - 美国自动策略
-  - 日本自动策略
-  - 台湾自动策略
-  - 新国故转
-  - 美国故转
-- name: 兜底后备策略
-  type: select
-  proxies:
-  - DIRECT
-  - 全部节点
-  - 全部负载均衡
-  - 美国自动策略
-  - 美国故转
-  - 香港故转
-  - 香港自动策略
-  - 台湾故转
-  - 日本故转
-  - 韩国故转
-  - 新国故转
-  - 英国故转
-  - 法国故转
-  - 德国故转
-  - 顶级机场
-  - Kitty
-  - 亏本机场
-  - 赔钱机场
-  - 良心云
-  - 干杯机场
-- name: telegram
-  type: select
-  proxies:
-  - 全部节点
-  - 美国自动策略
-  - 美国故转
-  - 香港故转
-  - 香港自动策略
-  - 台湾故转
-  - 日本故转
-  - 韩国故转
-  - 新国故转
-  - 英国故转
-  - 法国故转
-  - 德国故转
-  - 顶级机场
-  - Kitty
-  - 亏本机场
-  - 赔钱机场
-  - 亏本机场
-  - 良心云
-  - 干杯机场
-- name: 干杯机场
-  type: select
-  use:
-  - 干杯机场
-  exclude-filter: 剩余|流量|官网|套餐|到期|游戏
-- name: 赔钱机场
-  type: select
-  use:
-  - 赔钱机场
-  exclude-filter: 剩余|流量|官网|套餐|到期|游戏
-- name: 亏本机场
-  type: select
-  use:
-  - 亏本机场
-  exclude-filter: 剩余|流量|官网|套餐|到期|游戏
-- name: 良心云
-  type: select
-  use:
-  - 良心云
-  exclude-filter: 剩余|流量|官网|套餐|到期|游戏
-  icon: https://cdn.jsdelivr.net/gh/Daveccx/ConvertRules@main/icons/liangxin.png
-- name: Kitty
-  type: select
-  use:
-  - Kitty
-  exclude-filter: 剩余|流量|官网|套餐|到期|游戏|距离下次
-- name: 顶级机场
-  type: select
-  use:
-  - 顶级机场
-  exclude-filter: 剩余|流量|官网|套餐|到期|游戏|距离下次
-- type: fallback
-  interval: 30
-  lazy: true
-  url: https://www.gstatic.com/generate_204
-  disable-udp: false
-  timeout: 2000
-  max-failed-times: 3
-  hidden: false
-  include-all-providers: true
-  empty-fallback: REJECT
-  name: 香港故转
-  filter: ^(?=.*((?i)🇭🇰|香港|(\b(HK|HKG|Hong)(\d+)?\b)))(?!.*((?i)回国|校园|游戏|🎮|(\b(GAME)\b))).*$
-- type: fallback
-  interval: 30
-  lazy: true
-  url: https://www.gstatic.com/generate_204
-  disable-udp: false
-  timeout: 2000
-  max-failed-times: 3
-  hidden: false
-  include-all-providers: true
-  empty-fallback: REJECT
-  name: 台湾故转
-  filter: ^(?=.*((?i)🇹🇼|台湾|(\b(TW|TWN|Tai|Taiwan)(\d+)?\b)))(?!.*((?i)回国|校园|游戏|🎮|(\b(GAME)\b))).*$
-- type: fallback
-  interval: 30
-  lazy: true
-  url: https://www.gstatic.com/generate_204
-  disable-udp: false
-  timeout: 2000
-  max-failed-times: 3
-  hidden: false
-  include-all-providers: true
-  empty-fallback: REJECT
-  name: 日本故转
-  filter: ^(?=.*((?i)🇯🇵|日本|川日|东京|大阪|泉日|埼玉|(\b(JP|JPN|Japan)(\d+)?\b)))(?!.*((?i)回国|校园|游戏|🎮|(\b(GAME)\b))).*$
-- type: fallback
-  interval: 30
-  lazy: true
-  url: https://www.gstatic.com/generate_204
-  disable-udp: false
-  timeout: 2000
-  max-failed-times: 3
-  hidden: false
-  include-all-providers: true
-  empty-fallback: REJECT
-  name: 韩国故转
-  filter: ^(?=.*((?i)🇰🇷|韩国|韓|首尔|(\b(KR|KOR|Korea)(\d+)?\b)))(?!.*((?i)回国|校园|游戏|🎮|(\b(GAME)\b))).*$
-- type: fallback
-  interval: 30
-  lazy: true
-  url: https://www.gstatic.com/generate_204
-  disable-udp: false
-  timeout: 2000
-  max-failed-times: 3
-  hidden: false
-  include-all-providers: true
-  empty-fallback: REJECT
-  name: 新国故转
-  filter: ^(?=.*((?i)🇸🇬|新加坡|狮|(\b(SG|SGP|Singapore)(\d+)?\b)))(?!.*((?i)回国|校园|游戏|🎮|(\b(GAME)\b))).*$
-- type: fallback
-  interval: 30
-  lazy: true
-  url: https://www.gstatic.com/generate_204
-  disable-udp: false
-  timeout: 2000
-  max-failed-times: 3
-  hidden: false
-  include-all-providers: true
-  empty-fallback: REJECT
-  name: 美国故转
-  filter: ^(?=.*((?i)🇺🇸|美国|波特兰|达拉斯|俄勒冈|凤凰城|费利蒙|硅谷|拉斯维加斯|洛杉矶|圣何塞|圣克拉拉|西雅图|芝加哥|(\b(US|USA|United States)(\d+)?\b)))(?!.*((?i)回国|校园|游戏|🎮|(\b(GAME)\b))).*$
-- type: fallback
-  interval: 30
-  lazy: true
-  url: https://www.gstatic.com/generate_204
-  disable-udp: false
-  timeout: 2000
-  max-failed-times: 3
-  hidden: false
-  include-all-providers: true
-  empty-fallback: REJECT
-  name: 英国故转
-  filter: ^(?=.*((?i)🇬🇧|英国|伦敦|(\b(UK|GBR|United Kingdom)(\d+)?\b)))(?!.*((?i)回国|校园|游戏|🎮|(\b(GAME)\b))).*$
-- type: fallback
-  interval: 30
-  lazy: true
-  url: https://www.gstatic.com/generate_204
-  disable-udp: false
-  timeout: 2000
-  max-failed-times: 3
-  hidden: false
-  include-all-providers: true
-  empty-fallback: REJECT
-  name: 法国故转
-  filter: ^(?=.*((?i)🇫🇷|法国|(\b(FR|FRA|France)(\d+)?\b)))(?!.*((?i)回国|校园|游戏|🎮|(\b(GAME)\b))).*$
-- type: fallback
-  interval: 30
-  lazy: true
-  url: https://www.gstatic.com/generate_204
-  disable-udp: false
-  timeout: 2000
-  max-failed-times: 3
-  hidden: false
-  include-all-providers: true
-  empty-fallback: REJECT
-  name: 德国故转
-  filter: ^(?=.*((?i)🇩🇪|德国|(\b(DE|DEU|Germany)(\d+)?\b)))(?!.*((?i)回国|校园|游戏|🎮|(\b(GAME)\b))).*$
-- type: url-test
-  interval: 30
-  tolerance: 30
-  lazy: true
-  url: https://www.gstatic.com/generate_204
-  disable-udp: false
-  timeout: 2000
-  max-failed-times: 3
-  hidden: false
-  include-all-providers: true
-  empty-fallback: REJECT
-  name: 香港自动策略
-  filter: ^(?=.*((?i)🇭🇰|香港|(\b(HK|HKG|Hong)(\d+)?\b)))(?!.*((?i)回国|校园|游戏|🎮|(\b(GAME)\b))).*$
-- type: url-test
-  interval: 30
-  tolerance: 30
-  lazy: true
-  url: https://www.gstatic.com/generate_204
-  disable-udp: false
-  timeout: 2000
-  max-failed-times: 3
-  hidden: false
-  include-all-providers: true
-  empty-fallback: REJECT
-  name: 台湾自动策略
-  filter: ^(?=.*((?i)🇹🇼|台湾|(\b(TW|TWN|Tai|Taiwan)(\d+)?\b)))(?!.*((?i)回国|校园|游戏|🎮|(\b(GAME)\b))).*$
-- type: url-test
-  interval: 30
-  tolerance: 30
-  lazy: true
-  url: https://www.gstatic.com/generate_204
-  disable-udp: false
-  timeout: 2000
-  max-failed-times: 3
-  hidden: false
-  include-all-providers: true
-  empty-fallback: REJECT
-  name: 日本自动策略
-  filter: ^(?=.*((?i)🇯🇵|日本|川日|东京|大阪|泉日|埼玉|(\b(JP|JPN|Japan)(\d+)?\b)))(?!.*((?i)回国|校园|游戏|🎮|(\b(GAME)\b))).*$
-- type: url-test
-  interval: 30
-  tolerance: 30
-  lazy: true
-  url: https://www.gstatic.com/generate_204
-  disable-udp: false
-  timeout: 2000
-  max-failed-times: 3
-  hidden: false
-  include-all-providers: true
-  empty-fallback: REJECT
-  name: 韩国自动策略
-  filter: ^(?=.*((?i)🇰🇷|韩国|韓|首尔|(\b(KR|KOR|Korea)(\d+)?\b)))(?!.*((?i)回国|校园|游戏|🎮|(\b(GAME)\b))).*$
-- type: url-test
-  interval: 30
-  tolerance: 30
-  lazy: true
-  url: https://www.gstatic.com/generate_204
-  disable-udp: false
-  timeout: 2000
-  max-failed-times: 3
-  hidden: false
-  include-all-providers: true
-  empty-fallback: REJECT
-  name: 新国自动策略
-  filter: ^(?=.*((?i)🇸🇬|新加坡|狮|(\b(SG|SGP|Singapore)(\d+)?\b)))(?!.*((?i)回国|校园|游戏|🎮|(\b(GAME)\b))).*$
-- type: url-test
-  interval: 30
-  tolerance: 30
-  lazy: true
-  url: https://www.gstatic.com/generate_204
-  disable-udp: false
-  timeout: 2000
-  max-failed-times: 3
-  hidden: false
-  include-all-providers: true
-  empty-fallback: REJECT
-  name: 美国自动策略
-  filter: ^(?=.*((?i)🇺🇸|美国|波特兰|达拉斯|俄勒冈|凤凰城|费利蒙|硅谷|拉斯维加斯|洛杉矶|圣何塞|圣克拉拉|西雅图|芝加哥|(\b(US|USA|United States)(\d+)?\b)))(?!.*((?i)回国|校园|游戏|🎮|(\b(GAME)\b))).*$
-- type: url-test
-  interval: 30
-  tolerance: 30
-  lazy: true
-  url: https://www.gstatic.com/generate_204
-  disable-udp: false
-  timeout: 2000
-  max-failed-times: 3
-  hidden: false
-  include-all-providers: true
-  empty-fallback: REJECT
-  name: 英国自动策略
-  filter: ^(?=.*((?i)🇬🇧|英国|伦敦|(\b(UK|GBR|United Kingdom)(\d+)?\b)))(?!.*((?i)回国|校园|游戏|🎮|(\b(GAME)\b))).*$
-- type: url-test
-  interval: 30
-  tolerance: 30
-  lazy: true
-  url: https://www.gstatic.com/generate_204
-  disable-udp: false
-  timeout: 2000
-  max-failed-times: 3
-  hidden: false
-  include-all-providers: true
-  empty-fallback: REJECT
-  name: 法国自动策略
-  filter: ^(?=.*((?i)🇫🇷|法国|(\b(FR|FRA|France)(\d+)?\b)))(?!.*((?i)回国|校园|游戏|🎮|(\b(GAME)\b))).*$
-- type: url-test
-  interval: 30
-  tolerance: 30
-  lazy: true
-  url: https://www.gstatic.com/generate_204
-  disable-udp: false
-  timeout: 2000
-  max-failed-times: 3
-  hidden: false
-  include-all-providers: true
-  empty-fallback: REJECT
-  name: 德国自动策略
-  filter: ^(?=.*((?i)🇩🇪|德国|(\b(DE|DEU|Germany)(\d+)?\b)))(?!.*((?i)回国|校园|游戏|🎮|(\b(GAME)\b))).*$
+  - {name: 全部节点, type: select, proxies: [全部自动, 全部故障转移, 全部负载均衡, 美国自动策略, 美国故转, 香港自动策略, 台湾自动策略, 日本自动策略, 韩国自动策略, 新国自动策略, 英国自动策略, 法国自动策略, 德国自动策略, 顶级机场, Kitty, 亏本机场, 赔钱机场, 良心云, 干杯机场]}
+  - {name: C-Proxy, type: select, proxies: [美国自动策略, 美国故转, 香港故转, 香港自动策略, 台湾故转, 日本故转, 韩国故转, 全部负载均衡, 新国故转, 英国故转, 法国故转, 德国故转, 顶级机场, Kitty, 亏本机场, 赔钱机场, 良心云, 干杯机场]}
+  - {type: url-test, interval: 30, tolerance: 30, lazy: true, url: 'https://www.gstatic.com/generate_204', disable-udp: false, timeout: 2000, max-failed-times: 3, hidden: false, include-all-providers: true, empty-fallback: REJECT, name: 全部自动, exclude-filter: 剩余|流量|官网|套餐|到期|游戏}
+  - {type: fallback, interval: 30, lazy: true, url: 'https://www.gstatic.com/generate_204', disable-udp: false, timeout: 2000, max-failed-times: 3, hidden: false, include-all-providers: true, empty-fallback: REJECT, name: 全部故障转移, exclude-filter: 剩余|流量|官网|套餐|到期|游戏}
+  - {type: load-balance, interval: 30, lazy: true, url: 'https://www.gstatic.com/generate_204', disable-udp: false, strategy: consistent-hashing, timeout: 2000, max-failed-times: 3, hidden: true, include-all-providers: true, empty-fallback: REJECT, name: 全部负载均衡, exclude-filter: 剩余|流量|官网|套餐|到期|游戏}
+  - {name: 游戏选择, type: select, include-all-providers: true, filter: '^(?=.*((?i)游戏|🎮|(\b(GAME)(\d+)?\b)))(?!.*((?i)回国|校园)).*$', proxies: [DIRECT, 全球选择]}
+  - {name: 全球选择, type: select, proxies: [兜底后备策略, 全部自动, 全部故障转移, 全部负载均衡, 美国自动策略, 美国故转, 香港自动策略, 台湾自动策略, 日本自动策略, 韩国自动策略, 新国自动策略, 英国自动策略, 法国自动策略, 德国自动策略, 顶级机场, Kitty, 亏本机场, 赔钱机场, 良心云, 干杯机场]}
+  - {name: AI, type: fallback, proxies: [美国自动策略, 日本自动策略, 台湾自动策略, 新国故转, 美国故转]}
+  - {name: 兜底后备策略, type: select, proxies: [DIRECT, 全部节点, 全部负载均衡, 美国自动策略, 美国故转, 香港故转, 香港自动策略, 台湾故转, 日本故转, 韩国故转, 新国故转, 英国故转, 法国故转, 德国故转, 顶级机场, Kitty, 亏本机场, 赔钱机场, 良心云, 干杯机场]}
+  - {name: telegram, type: select, proxies: [全部节点, 美国自动策略, 美国故转, 香港故转, 香港自动策略, 台湾故转, 日本故转, 韩国故转, 新国故转, 英国故转, 法国故转, 德国故转, 顶级机场, Kitty, 亏本机场, 赔钱机场, 亏本机场, 良心云, 干杯机场]}
+  - {name: 干杯机场, type: select, use: [干杯机场], exclude-filter: 剩余|流量|官网|套餐|到期|游戏}
+  - {name: 赔钱机场, type: select, use: [赔钱机场], exclude-filter: 剩余|流量|官网|套餐|到期|游戏}
+  - {name: 亏本机场, type: select, use: [亏本机场], exclude-filter: 剩余|流量|官网|套餐|到期|游戏}
+  - {name: 良心云, type: select, use: [良心云], exclude-filter: 剩余|流量|官网|套餐|到期|游戏, icon: 'https://cdn.jsdelivr.net/gh/Daveccx/ConvertRules@main/icons/liangxin.png'}
+  - {name: Kitty, type: select, use: [Kitty], exclude-filter: 剩余|流量|官网|套餐|到期|游戏|距离下次}
+  - {name: 顶级机场, type: select, use: [顶级机场], exclude-filter: 剩余|流量|官网|套餐|到期|游戏|距离下次}
+  - {type: fallback, interval: 30, lazy: true, url: 'https://www.gstatic.com/generate_204', disable-udp: false, timeout: 2000, max-failed-times: 3, hidden: false, include-all-providers: true, empty-fallback: REJECT, name: 香港故转, filter: '^(?=.*((?i)🇭🇰|香港|(\b(HK|HKG|Hong)(\d+)?\b)))(?!.*((?i)回国|校园|游戏|🎮|(\b(GAME)\b))).*$'}
+  - {type: fallback, interval: 30, lazy: true, url: 'https://www.gstatic.com/generate_204', disable-udp: false, timeout: 2000, max-failed-times: 3, hidden: false, include-all-providers: true, empty-fallback: REJECT, name: 台湾故转, filter: '^(?=.*((?i)🇹🇼|台湾|(\b(TW|TWN|Tai|Taiwan)(\d+)?\b)))(?!.*((?i)回国|校园|游戏|🎮|(\b(GAME)\b))).*$'}
+  - {type: fallback, interval: 30, lazy: true, url: 'https://www.gstatic.com/generate_204', disable-udp: false, timeout: 2000, max-failed-times: 3, hidden: false, include-all-providers: true, empty-fallback: REJECT, name: 日本故转, filter: '^(?=.*((?i)🇯🇵|日本|川日|东京|大阪|泉日|埼玉|(\b(JP|JPN|Japan)(\d+)?\b)))(?!.*((?i)回国|校园|游戏|🎮|(\b(GAME)\b))).*$'}
+  - {type: fallback, interval: 30, lazy: true, url: 'https://www.gstatic.com/generate_204', disable-udp: false, timeout: 2000, max-failed-times: 3, hidden: false, include-all-providers: true, empty-fallback: REJECT, name: 韩国故转, filter: '^(?=.*((?i)🇰🇷|韩国|韓|首尔|(\b(KR|KOR|Korea)(\d+)?\b)))(?!.*((?i)回国|校园|游戏|🎮|(\b(GAME)\b))).*$'}
+  - {type: fallback, interval: 30, lazy: true, url: 'https://www.gstatic.com/generate_204', disable-udp: false, timeout: 2000, max-failed-times: 3, hidden: false, include-all-providers: true, empty-fallback: REJECT, name: 新国故转, filter: '^(?=.*((?i)🇸🇬|新加坡|狮|(\b(SG|SGP|Singapore)(\d+)?\b)))(?!.*((?i)回国|校园|游戏|🎮|(\b(GAME)\b))).*$'}
+  - {type: fallback, interval: 30, lazy: true, url: 'https://www.gstatic.com/generate_204', disable-udp: false, timeout: 2000, max-failed-times: 3, hidden: false, include-all-providers: true, empty-fallback: REJECT, name: 美国故转, filter: '^(?=.*((?i)🇺🇸|美国|波特兰|达拉斯|俄勒冈|凤凰城|费利蒙|硅谷|拉斯维加斯|洛杉矶|圣何塞|圣克拉拉|西雅图|芝加哥|(\b(US|USA|United States)(\d+)?\b)))(?!.*((?i)回国|校园|游戏|🎮|(\b(GAME)\b))).*$'}
+  - {type: fallback, interval: 30, lazy: true, url: 'https://www.gstatic.com/generate_204', disable-udp: false, timeout: 2000, max-failed-times: 3, hidden: false, include-all-providers: true, empty-fallback: REJECT, name: 英国故转, filter: '^(?=.*((?i)🇬🇧|英国|伦敦|(\b(UK|GBR|United Kingdom)(\d+)?\b)))(?!.*((?i)回国|校园|游戏|🎮|(\b(GAME)\b))).*$'}
+  - {type: fallback, interval: 30, lazy: true, url: 'https://www.gstatic.com/generate_204', disable-udp: false, timeout: 2000, max-failed-times: 3, hidden: false, include-all-providers: true, empty-fallback: REJECT, name: 法国故转, filter: '^(?=.*((?i)🇫🇷|法国|(\b(FR|FRA|France)(\d+)?\b)))(?!.*((?i)回国|校园|游戏|🎮|(\b(GAME)\b))).*$'}
+  - {type: fallback, interval: 30, lazy: true, url: 'https://www.gstatic.com/generate_204', disable-udp: false, timeout: 2000, max-failed-times: 3, hidden: false, include-all-providers: true, empty-fallback: REJECT, name: 德国故转, filter: '^(?=.*((?i)🇩🇪|德国|(\b(DE|DEU|Germany)(\d+)?\b)))(?!.*((?i)回国|校园|游戏|🎮|(\b(GAME)\b))).*$'}
+  - {type: url-test, interval: 30, tolerance: 30, lazy: true, url: 'https://www.gstatic.com/generate_204', disable-udp: false, timeout: 2000, max-failed-times: 3, hidden: false, include-all-providers: true, empty-fallback: REJECT, name: 香港自动策略, filter: '^(?=.*((?i)🇭🇰|香港|(\b(HK|HKG|Hong)(\d+)?\b)))(?!.*((?i)回国|校园|游戏|🎮|(\b(GAME)\b))).*$'}
+  - {type: url-test, interval: 30, tolerance: 30, lazy: true, url: 'https://www.gstatic.com/generate_204', disable-udp: false, timeout: 2000, max-failed-times: 3, hidden: false, include-all-providers: true, empty-fallback: REJECT, name: 台湾自动策略, filter: '^(?=.*((?i)🇹🇼|台湾|(\b(TW|TWN|Tai|Taiwan)(\d+)?\b)))(?!.*((?i)回国|校园|游戏|🎮|(\b(GAME)\b))).*$'}
+  - {type: url-test, interval: 30, tolerance: 30, lazy: true, url: 'https://www.gstatic.com/generate_204', disable-udp: false, timeout: 2000, max-failed-times: 3, hidden: false, include-all-providers: true, empty-fallback: REJECT, name: 日本自动策略, filter: '^(?=.*((?i)🇯🇵|日本|川日|东京|大阪|泉日|埼玉|(\b(JP|JPN|Japan)(\d+)?\b)))(?!.*((?i)回国|校园|游戏|🎮|(\b(GAME)\b))).*$'}
+  - {type: url-test, interval: 30, tolerance: 30, lazy: true, url: 'https://www.gstatic.com/generate_204', disable-udp: false, timeout: 2000, max-failed-times: 3, hidden: false, include-all-providers: true, empty-fallback: REJECT, name: 韩国自动策略, filter: '^(?=.*((?i)🇰🇷|韩国|韓|首尔|(\b(KR|KOR|Korea)(\d+)?\b)))(?!.*((?i)回国|校园|游戏|🎮|(\b(GAME)\b))).*$'}
+  - {type: url-test, interval: 30, tolerance: 30, lazy: true, url: 'https://www.gstatic.com/generate_204', disable-udp: false, timeout: 2000, max-failed-times: 3, hidden: false, include-all-providers: true, empty-fallback: REJECT, name: 新国自动策略, filter: '^(?=.*((?i)🇸🇬|新加坡|狮|(\b(SG|SGP|Singapore)(\d+)?\b)))(?!.*((?i)回国|校园|游戏|🎮|(\b(GAME)\b))).*$'}
+  - {type: url-test, interval: 30, tolerance: 30, lazy: true, url: 'https://www.gstatic.com/generate_204', disable-udp: false, timeout: 2000, max-failed-times: 3, hidden: false, include-all-providers: true, empty-fallback: REJECT, name: 美国自动策略, filter: '^(?=.*((?i)🇺🇸|美国|波特兰|达拉斯|俄勒冈|凤凰城|费利蒙|硅谷|拉斯维加斯|洛杉矶|圣何塞|圣克拉拉|西雅图|芝加哥|(\b(US|USA|United States)(\d+)?\b)))(?!.*((?i)回国|校园|游戏|🎮|(\b(GAME)\b))).*$'}
+  - {type: url-test, interval: 30, tolerance: 30, lazy: true, url: 'https://www.gstatic.com/generate_204', disable-udp: false, timeout: 2000, max-failed-times: 3, hidden: false, include-all-providers: true, empty-fallback: REJECT, name: 英国自动策略, filter: '^(?=.*((?i)🇬🇧|英国|伦敦|(\b(UK|GBR|United Kingdom)(\d+)?\b)))(?!.*((?i)回国|校园|游戏|🎮|(\b(GAME)\b))).*$'}
+  - {type: url-test, interval: 30, tolerance: 30, lazy: true, url: 'https://www.gstatic.com/generate_204', disable-udp: false, timeout: 2000, max-failed-times: 3, hidden: false, include-all-providers: true, empty-fallback: REJECT, name: 法国自动策略, filter: '^(?=.*((?i)🇫🇷|法国|(\b(FR|FRA|France)(\d+)?\b)))(?!.*((?i)回国|校园|游戏|🎮|(\b(GAME)\b))).*$'}
+  - {type: url-test, interval: 30, tolerance: 30, lazy: true, url: 'https://www.gstatic.com/generate_204', disable-udp: false, timeout: 2000, max-failed-times: 3, hidden: false, include-all-providers: true, empty-fallback: REJECT, name: 德国自动策略, filter: '^(?=.*((?i)🇩🇪|德国|(\b(DE|DEU|Germany)(\d+)?\b)))(?!.*((?i)回国|校园|游戏|🎮|(\b(GAME)\b))).*$'}
 rule-anchor:
   local:
     type: file
