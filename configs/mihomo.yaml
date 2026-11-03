@@ -424,7 +424,7 @@ proxy-groups:
   use:
   - 良心云
   exclude-filter: 剩余|流量|官网|套餐|到期|游戏
-  icon: https://fastly.jsdelivr.net/gh/Orz-3/mini@master/Color/Vpn.png
+  icon: https://cdn.jsdelivr.net/gh/Daveccx/ConvertRules@main/icons/liangxin.png
 - name: Kitty
   type: select
   use:
