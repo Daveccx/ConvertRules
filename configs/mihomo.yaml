@@ -14,7 +14,7 @@ find-process-mode: strict
 #global-client-fingerprint: chrome  #`udp: true` 和 `global-client-fingerprint: chrome` 都是废字段
 
 # =================== 局域网访问 ===================
-allow-lan: false
+allow-lan: true
 mode: rule
 log-level: info
 ipv6: false  # 核心开启 IPv6 关闭中
@@ -27,8 +27,8 @@ ipv6: false  # 核心开启 IPv6 关闭中
 
 # =================== GEO 数据 ===================
 geox-url:
-  mmdb: 'https://cdn.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@release/country.mmdb'
-  asn:  'https://cdn.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@release/GeoLite2-ASN.mmdb'
+  mmdb: 'https://testingcf.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@release/country-lite.mmdb'
+  asn:  'https://testingcf.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@release/GeoLite2-ASN.mmdb'
 
 profile:
   store-selected: true
@@ -69,7 +69,7 @@ tun:
 dns:
   enable: true
   ipv6: false
-  prefer-h3: true
+  prefer-h3: false
   listen: 0.0.0.0:1053
   enhanced-mode: fake-ip
   fake-ip-range: 198.18.0.1/16
@@ -197,44 +197,44 @@ RuleProviders: &RuleProviders {type: http, behavior: classical, interval: 3600, 
 
 # 策略组
 proxy-groups: 
-  - {name: 全部节点, type: select, proxies: [全部自动, 全部故障转移, 全部负载均衡, 美国自动策略, 美国故转, 香港自动策略, 台湾自动策略, 日本自动策略, 韩国自动策略, 新国自动策略, 英国自动策略, 法国自动策略, 德国自动策略,顶级机场, Kitty,亏本机场, 赔钱机场, 良心云,干杯机场]}
-  - {name: C-Proxy, type: select, proxies: [美国自动策略, 美国故转, 香港故转, 香港自动策略, 台湾故转, 日本故转, 韩国故转, 全部负载均衡, 新国故转, 英国故转, 法国故转, 德国故转, 顶级机场,Kitty,亏本机场, 赔钱机场, 良心云,干杯机场]}
-  - {name: 全部自动, <<: *UrlTest, exclude-filter: "剩余|流量|官网|套餐|到期|游戏"}
-  - {name: 全部故障转移, <<: *FallBack, exclude-filter: "剩余|流量|官网|套餐|到期|游戏"}
-  - {name: 全部负载均衡, <<: *LoadBalance, exclude-filter: "剩余|流量|官网|套餐|到期|游戏"}
-  - {name: 游戏选择, type: select, include-all-providers: true, filter: *FilterGame, proxies: [DIRECT, 全球选择]}
-  - {name: 全球选择, type: select, proxies: [兜底后备策略, 全部自动, 全部故障转移, 全部负载均衡, 美国自动策略, 美国故转, 香港自动策略, 台湾自动策略, 日本自动策略, 韩国自动策略, 新国自动策略, 英国自动策略, 法国自动策略, 德国自动策略, 顶级机场,Kitty,亏本机场, 赔钱机场,  良心云,干杯机场]}
-  - {name: AI, type: fallback, proxies: [美国自动策略, 日本自动策略, 台湾自动策略, 新国故转, 美国故转]}
-  - {name: 兜底后备策略, type: select, proxies: [DIRECT, 全部节点, 全部负载均衡, 美国自动策略, 美国故转, 香港故转, 香港自动策略, 台湾故转, 日本故转, 韩国故转, 新国故转, 英国故转, 法国故转, 德国故转, 顶级机场,Kitty,亏本机场, 赔钱机场, 良心云,干杯机场]}
-  - {name: telegram, type: select, proxies: [全部节点, 美国自动策略, 美国故转, 香港故转, 香港自动策略, 台湾故转, 日本故转, 韩国故转, 新国故转, 英国故转, 法国故转, 德国故转, 顶级机场,Kitty,亏本机场, 赔钱机场, 亏本机场, 良心云,干杯机场]}
-  - {name: 干杯机场, type: select, use: [干杯机场], exclude-filter: "剩余|流量|官网|套餐|到期|游戏"}
-  - {name: 赔钱机场, type: select, use: [赔钱机场], exclude-filter: "剩余|流量|官网|套餐|到期|游戏"}
-  - {name: 亏本机场, type: select, use: [亏本机场], exclude-filter: "剩余|流量|官网|套餐|到期|游戏"}
-  - {name: 良心云, type: select, use: [良心云], exclude-filter: "剩余|流量|官网|套餐|到期|游戏"}
-  - {name: Kitty, type: select, use: [Kitty], exclude-filter: "剩余|流量|官网|套餐|到期|游戏|距离下次"}
-  - {name: 顶级机场, type: select, use: [顶级机场], exclude-filter: "剩余|流量|官网|套餐|到期|游戏|距离下次"}
+  - {name: 全部节点, type: select, proxies: [全部自动, 全部故障转移, 全部负载均衡, 美国自动策略, 美国故转, 香港自动策略, 台湾自动策略, 日本自动策略, 韩国自动策略, 新国自动策略, 英国自动策略, 法国自动策略, 德国自动策略,顶级机场, Kitty,亏本机场, 赔钱机场, 良心云,干杯机场], icon: 'https://fastly.jsdelivr.net/gh/Orz-3/mini@master/Color/Static.png'}
+  - {name: C-Proxy, type: select, proxies: [美国自动策略, 美国故转, 香港故转, 香港自动策略, 台湾故转, 日本故转, 韩国故转, 全部负载均衡, 新国故转, 英国故转, 法国故转, 德国故转, 顶级机场,Kitty,亏本机场, 赔钱机场, 良心云,干杯机场], icon: 'https://fastly.jsdelivr.net/gh/Orz-3/mini@master/Color/Global.png'}
+  - {name: 全部自动, <<: *UrlTest, exclude-filter: "剩余|流量|官网|套餐|到期|游戏", icon: 'https://fastly.jsdelivr.net/gh/Orz-3/mini@master/Color/Auto.png'}
+  - {name: 全部故障转移, <<: *FallBack, exclude-filter: "剩余|流量|官网|套餐|到期|游戏", icon: 'https://fastly.jsdelivr.net/gh/Orz-3/mini@master/Color/Final.png'}
+  - {name: 全部负载均衡, <<: *LoadBalance, exclude-filter: "剩余|流量|官网|套餐|到期|游戏", icon: 'https://fastly.jsdelivr.net/gh/Orz-3/mini@master/Color/Auto.png'}
+  - {name: 游戏选择, type: select, include-all-providers: true, filter: *FilterGame, proxies: [DIRECT, 全球选择], icon: 'https://fastly.jsdelivr.net/gh/Orz-3/mini@master/Color/GAME.png'}
+  - {name: 全球选择, type: select, proxies: [兜底后备策略, 全部自动, 全部故障转移, 全部负载均衡, 美国自动策略, 美国故转, 香港自动策略, 台湾自动策略, 日本自动策略, 韩国自动策略, 新国自动策略, 英国自动策略, 法国自动策略, 德国自动策略, 顶级机场,Kitty,亏本机场, 赔钱机场,  良心云,干杯机场], icon: 'https://fastly.jsdelivr.net/gh/Orz-3/mini@master/Color/Global.png'}
+  - {name: AI, type: fallback, proxies: [美国自动策略, 日本自动策略, 台湾自动策略, 新国故转, 美国故转], icon: 'https://fastly.jsdelivr.net/gh/Koolson/Qure@master/IconSet/Color/ChatGPT.png'}
+  - {name: 兜底后备策略, type: select, proxies: [DIRECT, 全部节点, 全部负载均衡, 美国自动策略, 美国故转, 香港故转, 香港自动策略, 台湾故转, 日本故转, 韩国故转, 新国故转, 英国故转, 法国故转, 德国故转, 顶级机场,Kitty,亏本机场, 赔钱机场, 良心云,干杯机场], icon: 'https://fastly.jsdelivr.net/gh/Orz-3/mini@master/Color/Final.png'}
+  - {name: telegram, type: select, proxies: [全部节点, 美国自动策略, 美国故转, 香港故转, 香港自动策略, 台湾故转, 日本故转, 韩国故转, 新国故转, 英国故转, 法国故转, 德国故转, 顶级机场,Kitty,亏本机场, 赔钱机场, 亏本机场, 良心云,干杯机场], icon: 'https://fastly.jsdelivr.net/gh/Orz-3/mini@master/Color/Telegram.png'}
+  - {name: 干杯机场, type: select, use: [干杯机场], exclude-filter: "剩余|流量|官网|套餐|到期|游戏", icon: 'https://fastly.jsdelivr.net/gh/Orz-3/mini@master/Color/Vpn.png'}
+  - {name: 赔钱机场, type: select, use: [赔钱机场], exclude-filter: "剩余|流量|官网|套餐|到期|游戏", icon: 'https://fastly.jsdelivr.net/gh/Orz-3/mini@master/Color/Vpn.png'}
+  - {name: 亏本机场, type: select, use: [亏本机场], exclude-filter: "剩余|流量|官网|套餐|到期|游戏", icon: 'https://fastly.jsdelivr.net/gh/Orz-3/mini@master/Color/Vpn.png'}
+  - {name: 良心云, type: select, use: [良心云], exclude-filter: "剩余|流量|官网|套餐|到期|游戏", icon: 'https://fastly.jsdelivr.net/gh/Orz-3/mini@master/Color/Vpn.png'}
+  - {name: Kitty, type: select, use: [Kitty], exclude-filter: "剩余|流量|官网|套餐|到期|游戏|距离下次", icon: 'https://fastly.jsdelivr.net/gh/Orz-3/mini@master/Color/Vpn.png'}
+  - {name: 顶级机场, type: select, use: [顶级机场], exclude-filter: "剩余|流量|官网|套餐|到期|游戏|距离下次", icon: 'https://fastly.jsdelivr.net/gh/Orz-3/mini@master/Color/Vpn.png'}
  
-  - {name: 香港故转, <<: *FallBack, filter: *FilterHK}
-  - {name: 台湾故转, <<: *FallBack, filter: *FilterTW}
-  - {name: 日本故转, <<: *FallBack, filter: *FilterJP}
-  - {name: 韩国故转, <<: *FallBack, filter: *FilterKR}
-  - {name: 新国故转, <<: *FallBack, filter: *FilterSG}
-  - {name: 美国故转, <<: *FallBack, filter: *FilterUS}
-  - {name: 英国故转, <<: *FallBack, filter: *FilterUK}
-  - {name: 法国故转, <<: *FallBack, filter: *FilterFR}
-  - {name: 德国故转, <<: *FallBack, filter: *FilterDE}
+  - {name: 香港故转, <<: *FallBack, filter: *FilterHK, icon: 'https://fastly.jsdelivr.net/gh/Orz-3/mini@master/Color/HK.png'}
+  - {name: 台湾故转, <<: *FallBack, filter: *FilterTW, icon: 'https://fastly.jsdelivr.net/gh/Orz-3/mini@master/Color/TW.png'}
+  - {name: 日本故转, <<: *FallBack, filter: *FilterJP, icon: 'https://fastly.jsdelivr.net/gh/Orz-3/mini@master/Color/JP.png'}
+  - {name: 韩国故转, <<: *FallBack, filter: *FilterKR, icon: 'https://fastly.jsdelivr.net/gh/Orz-3/mini@master/Color/KR.png'}
+  - {name: 新国故转, <<: *FallBack, filter: *FilterSG, icon: 'https://fastly.jsdelivr.net/gh/Orz-3/mini@master/Color/SG.png'}
+  - {name: 美国故转, <<: *FallBack, filter: *FilterUS, icon: 'https://fastly.jsdelivr.net/gh/Orz-3/mini@master/Color/US.png'}
+  - {name: 英国故转, <<: *FallBack, filter: *FilterUK, icon: 'https://fastly.jsdelivr.net/gh/Orz-3/mini@master/Color/UK.png'}
+  - {name: 法国故转, <<: *FallBack, filter: *FilterFR, icon: 'https://fastly.jsdelivr.net/gh/Orz-3/mini@master/Color/FR.png'}
+  - {name: 德国故转, <<: *FallBack, filter: *FilterDE, icon: 'https://fastly.jsdelivr.net/gh/Orz-3/mini@master/Color/DE.png'}
   
   
 
-  - {name: 香港自动策略, <<: *UrlTest, filter: *FilterHK}
-  - {name: 台湾自动策略, <<: *UrlTest, filter: *FilterTW}
-  - {name: 日本自动策略, <<: *UrlTest, filter: *FilterJP}
-  - {name: 韩国自动策略, <<: *UrlTest, filter: *FilterKR}
-  - {name: 新国自动策略, <<: *UrlTest, filter: *FilterSG}
-  - {name: 美国自动策略, <<: *UrlTest, filter: *FilterUS}
-  - {name: 英国自动策略, <<: *UrlTest, filter: *FilterUK}
-  - {name: 法国自动策略, <<: *UrlTest, filter: *FilterFR}
-  - {name: 德国自动策略, <<: *UrlTest, filter: *FilterDE}
+  - {name: 香港自动策略, <<: *UrlTest, filter: *FilterHK, icon: 'https://fastly.jsdelivr.net/gh/Orz-3/mini@master/Color/HK.png'}
+  - {name: 台湾自动策略, <<: *UrlTest, filter: *FilterTW, icon: 'https://fastly.jsdelivr.net/gh/Orz-3/mini@master/Color/TW.png'}
+  - {name: 日本自动策略, <<: *UrlTest, filter: *FilterJP, icon: 'https://fastly.jsdelivr.net/gh/Orz-3/mini@master/Color/JP.png'}
+  - {name: 韩国自动策略, <<: *UrlTest, filter: *FilterKR, icon: 'https://fastly.jsdelivr.net/gh/Orz-3/mini@master/Color/KR.png'}
+  - {name: 新国自动策略, <<: *UrlTest, filter: *FilterSG, icon: 'https://fastly.jsdelivr.net/gh/Orz-3/mini@master/Color/SG.png'}
+  - {name: 美国自动策略, <<: *UrlTest, filter: *FilterUS, icon: 'https://fastly.jsdelivr.net/gh/Orz-3/mini@master/Color/US.png'}
+  - {name: 英国自动策略, <<: *UrlTest, filter: *FilterUK, icon: 'https://fastly.jsdelivr.net/gh/Orz-3/mini@master/Color/UK.png'}
+  - {name: 法国自动策略, <<: *UrlTest, filter: *FilterFR, icon: 'https://fastly.jsdelivr.net/gh/Orz-3/mini@master/Color/FR.png'}
+  - {name: 德国自动策略, <<: *UrlTest, filter: *FilterDE, icon: 'https://fastly.jsdelivr.net/gh/Orz-3/mini@master/Color/DE.png'}
 
 rule-anchor:
   local: &local { type: file, behavior: classical, format: yaml, interval: 3600 }
