@@ -15,7 +15,7 @@ Daveccx 的 mihomo 配置与规则集。公开仓库中不保存订阅链接、�
 ## 使用
 
 1. 从 `configs/` 下载对应客户端模板。
-2. 在 `proxy-providers` 中填入自己的订阅 URL。
+2. 在 `proxy-providers` 中填入自己的订阅 URL；这些 URL 只应保存在本机。
 3. Windows 客户端如果使用 TUN，请在客户端界面开启，并按需设置端口。
 4. `ALan` 和 `myProxy_ip` 通过仓库 Raw URL 引用；修改后客户端重新下载规则即可。
 5. Actions 每天北京时间 04:00 更新公共规则，不会覆盖这两个个人文件。
