@@ -6,7 +6,7 @@ Daveccx 的 mihomo 配置与规则集。公开仓库中不保存订阅链接、�
 
 | 路径 | 用途 |
 | --- | --- |
-| `configs/` | Clash Verge、CMFA、FlClash 四端脱敏模板 |
+| `configs/` | Clash Verge、CMFA、FlClash 四端模板，以及完整 `mihomo.yaml` 主配置 |
 | `rules/ALan.yaml` | 个人直连规则，人工维护 |
 | `rules/myProxy_ip.yaml` | 个人代理规则，人工维护 |
 | `rules/*.yaml` | 每日从 MetaCubeX 下载的公共规则 |
@@ -14,7 +14,7 @@ Daveccx 的 mihomo 配置与规则集。公开仓库中不保存订阅链接、�
 
 ## 使用
 
-1. 从 `configs/` 下载对应客户端模板。
+1. 从 `configs/` 下载对应客户端模板；需要完整 DNS、TUN、端口和策略组时使用 `mihomo.yaml`。
 2. 在 `proxy-providers` 中填入自己的订阅 URL；这些 URL 只应保存在本机。
 3. Windows 客户端如果使用 TUN，请在客户端界面开启，并按需设置端口。
 4. `ALan` 和 `myProxy_ip` 通过仓库 Raw URL 引用；修改后客户端重新下载规则即可。
