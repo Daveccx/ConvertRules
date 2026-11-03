@@ -1,8 +1,8 @@
-port: 27892
-socks-port: 27891
-mixed-port: 27890
-redir-port: 27893
-tproxy-port: 27894
+port: 17892
+socks-port: 17891
+mixed-port: 17890
+redir-port: 17893
+tproxy-port: 17894
 
 unified-delay: true
 geodata-mode: false
