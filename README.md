@@ -33,5 +33,6 @@ https://cdn.jsdelivr.net/gh/Daveccx/ConvertRules@main/rules/myProxy_ip.yaml
 
 - 不要向本仓库提交真实订阅、节点、token、密码或 `secret`。
 - 所有模板默认 `allow-lan: true`。这会把代理端口暴露给局域网；请只在本机配置 `authentication`，或在不共享时关闭 LAN。
-- 所有模板都不含 `external-controller` 和 `secret`。
+- 仅 `mihomo.yaml` 含 `external-controller` 和占位 `secret`；Verge、FlClash、Clash Meta 模板由客户端界面管理控制器。
+- `mihomo.yaml` 的 `external-controller: 0.0.0.0:9090` 会暴露到局域网，使用前必须把 `secret: "请改成强密码"` 改为真实强密码。
 - 如果订阅已经泄露，请在订阅服务商处重置链接，而不只是从仓库删除文本。
