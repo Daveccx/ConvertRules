@@ -185,7 +185,12 @@ LoadBalance: &LoadBalance {type: load-balance, interval: 30, lazy: true, url: 'h
 RuleProviders: &RuleProviders {type: http, behavior: classical, interval: 3600, format: yaml, proxy: DIRECT}
 
 # 策略组
-proxy-groups: 
+# =================== 订阅链接占位 ===================
+# 使用前只在本机填写这里；不要把本文件填好后的版本提交回仓库。
+# 订阅可能按 User-Agent 返回不同格式，必要时在对应 provider 中加 override.ua。
+# ====================================================
+
+proxy-groups:
   - {name: 全部节点, type: select, proxies: [全部自动, 全部故障转移, 全部负载均衡, 美国自动策略, 美国故转, 香港自动策略, 台湾自动策略, 日本自动策略, 韩国自动策略, 新国自动策略, 英国自动策略, 法国自动策略, 德国自动策略,顶级机场, Kitty,亏本机场, 赔钱机场, 良心云,干杯机场]}
   - {name: C-Proxy, type: select, proxies: [美国自动策略, 美国故转, 香港故转, 香港自动策略, 台湾故转, 日本故转, 韩国故转, 全部负载均衡, 新国故转, 英国故转, 法国故转, 德国故转, 顶级机场,Kitty,亏本机场, 赔钱机场, 良心云,干杯机场]}
   - {name: 全部自动, <<: *UrlTest, exclude-filter: "剩余|流量|官网|套餐|到期|游戏"}
@@ -230,125 +235,150 @@ rule-anchor:
   http: &http { type: http, behavior: classical, format: yaml, interval: 3600 }
 # 订阅规则
 rule-providers:
-    # ===== 基础分流 =====
   LAN:
     <<: *RuleProviders
-    path: './rules/Lan.yaml'
-    url: 'https://testingcf.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/Lan/Lan.yaml'
+    path: './rules/private.yaml'
+    url: 'https://raw.githubusercontent.com/Daveccx/ConvertRules/main/rules/private.yaml'
+
   Direct:
     <<: *RuleProviders
-    path: './rules/Direct.yaml'
-    url: 'https://testingcf.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/Direct/Direct.yaml'
+    path: './rules/not-cn.yaml'
+    url: 'https://raw.githubusercontent.com/Daveccx/ConvertRules/main/rules/not-cn.yaml'
+
   Proxy:
     <<: *RuleProviders
-    path: './rules/Proxy.yaml'
-    url: 'https://testingcf.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/Proxy/Proxy.yaml'
+    path: './rules/not-cn.yaml'
+    url: 'https://raw.githubusercontent.com/Daveccx/ConvertRules/main/rules/not-cn.yaml'
+
   Download:
     <<: *RuleProviders
-    path: './rules/Download.yaml'
-    url: 'https://testingcf.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/Download/Download.yaml'
+    path: './rules/not-cn.yaml'
+    url: 'https://raw.githubusercontent.com/Daveccx/ConvertRules/main/rules/not-cn.yaml'
+
   ChinaMax:
     <<: *RuleProviders
-    path: './rules/ChinaMax.yaml'
-    url: 'https://testingcf.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/ChinaMax/ChinaMax.yaml'
+    path: './rules/cn.yaml'
+    url: 'https://raw.githubusercontent.com/Daveccx/ConvertRules/main/rules/cn.yaml'
 
-  # ===== AI（替代原来单个 AI.yaml）=====
   OpenAI:
     <<: *RuleProviders
-    path: './rules/OpenAI.yaml'
-    url: 'https://testingcf.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/OpenAI/OpenAI.yaml'
+    path: './rules/ai.yaml'
+    url: 'https://raw.githubusercontent.com/Daveccx/ConvertRules/main/rules/ai.yaml'
+
   Gemini:
     <<: *RuleProviders
-    path: './rules/Gemini.yaml'
-    url: 'https://testingcf.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/Gemini/Gemini.yaml'
+    path: './rules/ai.yaml'
+    url: 'https://raw.githubusercontent.com/Daveccx/ConvertRules/main/rules/ai.yaml'
+
   Claude:
     <<: *RuleProviders
-    path: './rules/Claude.yaml'
-    url: 'https://testingcf.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/Claude/Claude.yaml'
+    path: './rules/ai.yaml'
+    url: 'https://raw.githubusercontent.com/Daveccx/ConvertRules/main/rules/ai.yaml'
 
-  # ===== 流媒体 / 游戏 =====
   TikTok:
     <<: *RuleProviders
-    path: './rules/TikTok.yaml'
-    url: 'https://testingcf.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/TikTok/TikTok.yaml'
+    path: './rules/tiktok.yaml'
+    url: 'https://raw.githubusercontent.com/Daveccx/ConvertRules/main/rules/tiktok.yaml'
+
   Netflix:
     <<: *RuleProviders
-    path: './rules/Netflix.yaml'
-    url: 'https://testingcf.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/Netflix/Netflix.yaml'
+    path: './rules/netflix.yaml'
+    url: 'https://raw.githubusercontent.com/Daveccx/ConvertRules/main/rules/netflix.yaml'
+
   Emby:
     <<: *RuleProviders
-    path: './rules/Emby.yaml'
-    url: 'https://testingcf.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/Emby/Emby.yaml'
+    path: './rules/not-cn.yaml'
+    url: 'https://raw.githubusercontent.com/Daveccx/ConvertRules/main/rules/not-cn.yaml'
+
   YouTube:
     <<: *RuleProviders
-    path: './rules/YouTube.yaml'
-    url: 'https://testingcf.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/YouTube/YouTube.yaml'
+    path: './rules/youtube.yaml'
+    url: 'https://raw.githubusercontent.com/Daveccx/ConvertRules/main/rules/youtube.yaml'
+
   Spotify:
     <<: *RuleProviders
-    path: './rules/Spotify.yaml'
-    url: 'https://testingcf.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/Spotify/Spotify.yaml'
+    path: './rules/not-cn.yaml'
+    url: 'https://raw.githubusercontent.com/Daveccx/ConvertRules/main/rules/not-cn.yaml'
+
   Steam:
     <<: *RuleProviders
-    path: './rules/Steam.yaml'
-    url: 'https://testingcf.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/Steam/Steam.yaml'
+    path: './rules/not-cn.yaml'
+    url: 'https://raw.githubusercontent.com/Daveccx/ConvertRules/main/rules/not-cn.yaml'
+
   Game:
     <<: *RuleProviders
-    path: './rules/Game.yaml'
-    url: 'https://testingcf.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/Game/Game.yaml'
+    path: './rules/category-games.yaml'
+    url: 'https://raw.githubusercontent.com/Daveccx/ConvertRules/main/rules/category-games.yaml'
 
-  # ===== 大厂服务 =====
   Google:
     <<: *RuleProviders
-    path: './rules/Google.yaml'
-    url: 'https://testingcf.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/Google/Google.yaml'
+    path: './rules/google.yaml'
+    url: 'https://raw.githubusercontent.com/Daveccx/ConvertRules/main/rules/google.yaml'
+
   Microsoft:
     <<: *RuleProviders
-    path: './rules/Microsoft.yaml'
-    url: 'https://testingcf.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/Microsoft/Microsoft.yaml'
+    path: './rules/microsoft.yaml'
+    url: 'https://raw.githubusercontent.com/Daveccx/ConvertRules/main/rules/microsoft.yaml'
+
   Telegram:
     <<: *RuleProviders
-    path: './rules/Telegram.yaml'
-    url: 'https://testingcf.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/Telegram/Telegram.yaml'
+    path: './rules/telegram.yaml'
+    url: 'https://raw.githubusercontent.com/Daveccx/ConvertRules/main/rules/telegram.yaml'
+
   Apple:
     <<: *RuleProviders
-    path: './rules/Apple.yaml'
-    url: 'https://testingcf.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/Apple/Apple.yaml'
+    path: './rules/apple-cn.yaml'
+    url: 'https://raw.githubusercontent.com/Daveccx/ConvertRules/main/rules/apple-cn.yaml'
+
   AppStore:
     <<: *RuleProviders
-    path: './rules/AppStore.yaml'
-    url: 'https://testingcf.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/AppStore/AppStore.yaml'
+    path: './rules/apple-cn.yaml'
+    url: 'https://raw.githubusercontent.com/Daveccx/ConvertRules/main/rules/apple-cn.yaml'
+
   TestFlight:
     <<: *RuleProviders
-    path: './rules/TestFlight.yaml'
-    url: 'https://testingcf.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/TestFlight/TestFlight.yaml'
+    path: './rules/apple-cn.yaml'
+    url: 'https://raw.githubusercontent.com/Daveccx/ConvertRules/main/rules/apple-cn.yaml'
+
   GitHub:
     <<: *RuleProviders
-    path: './rules/GitHub.yaml'
-    url: 'https://testingcf.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/GitHub/GitHub.yaml'
+    path: './rules/github.yaml'
+    url: 'https://raw.githubusercontent.com/Daveccx/ConvertRules/main/rules/github.yaml'
+
   Cloudflare:
     <<: *RuleProviders
-    path: './rules/Cloudflare.yaml'
-    url: 'https://testingcf.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/Cloudflare/Cloudflare.yaml'
+    path: './rules/not-cn.yaml'
+    url: 'https://raw.githubusercontent.com/Daveccx/ConvertRules/main/rules/not-cn.yaml'
+
   Speedtest:
     <<: *RuleProviders
-    path: './rules/Speedtest.yaml'
-    url: 'https://testingcf.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/Speedtest/Speedtest.yaml'
+    path: './rules/not-cn.yaml'
+    url: 'https://raw.githubusercontent.com/Daveccx/ConvertRules/main/rules/not-cn.yaml'
 
-  # ===== 用 geosite 替代找不到的 kelee 专有集 =====
   iCloudChina:
     <<: *RuleProviders
-    path: './rules/iCloudChina.yaml'
-    url: 'https://testingcf.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@meta/geo/geosite/apple@cn.yaml'
+    path: './rules/apple-cn.yaml'
+    url: 'https://raw.githubusercontent.com/Daveccx/ConvertRules/main/rules/apple-cn.yaml'
+
   Private:
     <<: *RuleProviders
-    path: './rules/Private.yaml'
-    url: 'https://testingcf.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@meta/geo/geosite/private.yaml'
+    path: './rules/private.yaml'
+    url: 'https://raw.githubusercontent.com/Daveccx/ConvertRules/main/rules/private.yaml'
+
   GeolocationNotCN:
     <<: *RuleProviders
-    path: './rules/GeolocationNotCN.yaml'
-    url: 'https://testingcf.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@meta/geo/geosite/geolocation-!cn.yaml'
+    path: './rules/not-cn.yaml'
+    url: 'https://raw.githubusercontent.com/Daveccx/ConvertRules/main/rules/not-cn.yaml'
 
-  # ===== 你自己的本地规则（保留，这才是"学习"的地方）=====
+  CN_IP:
+    type: http
+    behavior: ipcidr
+    format: yaml
+    interval: 86400
+    proxy: DIRECT
+    path: './rules/cn-ip.yaml'
+    url: 'https://raw.githubusercontent.com/Daveccx/ConvertRules/main/rules/cn-ip.yaml'
+
   myProxy_ip:
     type: http
     behavior: classical
@@ -357,6 +387,7 @@ rule-providers:
     proxy: DIRECT
     path: './rules/myProxy_ip.yaml'
     url: 'https://raw.githubusercontent.com/Daveccx/ConvertRules/main/rules/myProxy_ip.yaml'
+
   ALan:
     type: http
     behavior: classical
@@ -365,8 +396,6 @@ rule-providers:
     proxy: DIRECT
     path: './rules/ALan.yaml'
     url: 'https://raw.githubusercontent.com/Daveccx/ConvertRules/main/rules/ALan.yaml'
-
-
 
 
 # 规则指向
