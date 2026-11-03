@@ -456,4 +456,4 @@ rules:
   - RULE-SET, GeolocationNotCN, 全球选择
   - RULE-SET, ChinaMax, DIRECT
   - RULE-SET, CN_IP, DIRECT, no-resolve
-  - MATCH, 全球选择
+  - MATCH, 兜底后备策略
