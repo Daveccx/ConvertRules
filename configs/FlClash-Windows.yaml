@@ -20,7 +20,7 @@ find-process-mode: strict
 #global-client-fingerprint: chrome  #`udp: true` 和 `global-client-fingerprint: chrome` 都是废字段
 
 # =================== 局域网访问 ===================
-allow-lan: false
+allow-lan: true
 mode: rule
 log-level: info
 ipv6: false  # 核心开启 IPv6 关闭中
@@ -58,7 +58,7 @@ sniffer:
 
 # =================== TUN ===================
 tun:
-  enable: false
+  enable: true
   stack: mixed
   dns-hijack:
     - any:53
@@ -72,7 +72,7 @@ tun:
 dns:
   enable: true
   ipv6: false
-  prefer-h3: true
+  prefer-h3: false
   listen: 0.0.0.0:1053
   enhanced-mode: fake-ip
   fake-ip-range: 198.18.0.1/16
