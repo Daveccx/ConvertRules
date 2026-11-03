@@ -14,7 +14,7 @@ find-process-mode: strict
 #global-client-fingerprint: chrome  #`udp: true` 和 `global-client-fingerprint: chrome` 都是废字段
 
 # =================== 局域网访问 ===================
-allow-lan: false
+allow-lan: true
 mode: rule
 log-level: info
 ipv6: false  # 核心开启 IPv6 关闭中
