@@ -1,6 +1,7 @@
 # UpdateTime：2026-05-25 02:38:46
 # RuleCount：9
 payload:
+  - DOMAIN-SUFFIX,davea.de5.net
   - IP-CIDR,10.0.0.0/8,no-resolve
   - IP-CIDR,100.64.0.0/10,no-resolve
   - IP-CIDR,172.16.0.0/12,no-resolve
@@ -13,4 +14,4 @@ payload:
   - DOMAIN,1236999.xyz
   - IP-CIDR,218.244.145.41/32,DIRECT,no-resolve
   - IP-CIDR,218.244.145.45/32,DIRECT,no-resolve
-  - DOMAIN-SUFFIX,davea.de5.net
+
