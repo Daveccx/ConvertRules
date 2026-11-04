@@ -146,8 +146,8 @@ proxy-groups:
   - {name: 良心云, type: select, use: [良心云], exclude-filter: "剩余|流量|官网|套餐|到期|游戏", icon: 'https://cdn.jsdelivr.net/gh/Daveccx/ConvertRules@main/icons/liangxin.png'}
   - {name: Kitty, type: select, use: [Kitty], exclude-filter: "剩余|流量|官网|套餐|到期|游戏|距离下次", icon: 'https://cdn.jsdelivr.net/gh/Daveccx/ConvertRules@main/icons/kitty.png'}
   - {name: 顶级机场, type: select, use: [顶级机场], exclude-filter: "剩余|流量|官网|套餐|到期|游戏|距离下次", icon: 'https://cdn.jsdelivr.net/gh/Daveccx/ConvertRules@main/icons/dingji.png'}
-  - {name: 雪山机场, type: select, use: [雪山机场], exclude-filter: "剩余|流量|官网|套餐|到期|游戏|距离下次"}
-  - {name: cf优选, type: select, use: [cf优选], exclude-filter: "剩余|流量|官网|套餐|到期|游戏|距离下次|公益代理频道|退群订阅自动失效"}
+  - {name: 雪山机场, type: select, use: [雪山机场], exclude-filter: "剩余|流量|官网|套餐|到期|游戏|距离下次", icon: 'https://cdn.jsdelivr.net/gh/Daveccx/ConvertRules@main/icons/xueshan.png'}
+  - {name: cf优选, type: select, use: [cf优选], exclude-filter: "剩余|流量|官网|套餐|到期|游戏|距离下次|公益代理频道|退群订阅自动失效", icon: 'https://cdn.jsdelivr.net/gh/Daveccx/ConvertRules@main/icons/cloudflare-256.png'}
  
   - {name: 香港故转, <<: *FallBack, filter: *FilterHK, icon: 'https://fastly.jsdelivr.net/gh/Orz-3/mini@master/Color/HK.png'}
   - {name: 台湾故转, <<: *FallBack, filter: *FilterTW, icon: 'https://fastly.jsdelivr.net/gh/Orz-3/mini@master/Color/TW.png'}
