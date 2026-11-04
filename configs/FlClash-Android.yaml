@@ -321,6 +321,29 @@ rules:
 #代理
   - RULE-SET, myProxy_ip,全球选择
 
+  # 站点专用分流
+  - DOMAIN-SUFFIX,dmm.co.jp,日本自动策略
+  - DOMAIN-SUFFIX,hbox.jp,日本自动策略
+  - DOMAIN-SUFFIX,jav321.com,日本自动策略
+  - DOMAIN,adult.contents.fc2.com,日本自动策略
+  - DOMAIN-SUFFIX,mgstage.com,日本自动策略
+  - DOMAIN-SUFFIX,caribbeancom.com,日本自动策略
+  - DOMAIN-SUFFIX,avbase.net,香港自动策略
+  - DOMAIN-SUFFIX,freejavbt.com,香港自动策略
+  - DOMAIN-SUFFIX,javlibrary.com,香港自动策略
+  - DOMAIN-SUFFIX,madou.club,香港自动策略
+  - DOMAIN-SUFFIX,theporndb.net,香港自动策略
+  - DOMAIN-SUFFIX,xchina.co,香港自动策略
+  - DOMAIN-SUFFIX,airav.io,新国自动策略
+  - DOMAIN-SUFFIX,javten.com,新国自动策略
+  - DOMAIN-SUFFIX,javdb.com,新国自动策略
+  - DOMAIN-SUFFIX,madouqu.com,新国自动策略
+  - DOMAIN-SUFFIX,missav123.com,新国自动策略
+  - DOMAIN-SUFFIX,7mmtv.sx,新国自动策略
+  - DOMAIN-SUFFIX,avmoo.website,台湾自动策略
+  - DOMAIN-SUFFIX,avsox.click,台湾自动策略
+  - DOMAIN-SUFFIX,javbus.com,美国自动策略
+
  # AI（走 AI 组）
   - RULE-SET, AI, AI
 
