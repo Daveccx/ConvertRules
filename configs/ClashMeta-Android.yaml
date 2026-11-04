@@ -157,7 +157,7 @@ UrlTest: &UrlTest {type: url-test, interval: 30, tolerance: 30, lazy: true, url:
 # 锚点 - 故障转移参数 [每 6 秒一次惰性健康检查，时延超过 2 秒判定为失败，失败 3 次则自动触发健康检查]
 FallBack: &FallBack {type: fallback, interval: 30, lazy: true, url: 'https://www.gstatic.com/generate_204', disable-udp: false, timeout: 2000, max-failed-times: 3, hidden: false, include-all-providers: true, empty-fallback: REJECT}
 # 锚点 - 负载均衡参数 [每 30 秒一次惰性健康检查，时延超过 2 秒判定为失败，失败 3 次则自动触发健康检查]
-LoadBalance: &LoadBalance {type: load-balance, interval: 30, lazy: true, url: 'https://www.gstatic.com/generate_204', disable-udp: false, strategy: consistent-hashing, timeout: 2000, max-failed-times: 3, hidden: true, include-all-providers: true, empty-fallback: REJECT}
+LoadBalance: &LoadBalance {type: load-balance, interval: 30, lazy: true, url: 'https://www.gstatic.com/generate_204', disable-udp: false, strategy: consistent-hashing, timeout: 2000, max-failed-times: 3, hidden: false, include-all-providers: true, empty-fallback: REJECT}
 # 锚点 - 规则参数 [每小时更新一次订阅规则，更新规则时使用直连策略]
 
 # blackmatrix7 classical 规则
@@ -172,15 +172,15 @@ IpProviders: &IpProviders {type: http, behavior: ipcidr, interval: 86400, format
 # 策略组
 proxy-groups: 
   - {name: 全部节点, type: select, proxies: [全部自动, 全部故障转移, 全部负载均衡, 美国自动策略, 美国故转, 香港自动策略, 台湾自动策略, 日本自动策略, 韩国自动策略, 新国自动策略, 英国自动策略, 法国自动策略, 德国自动策略,顶级机场, Kitty,亏本机场, 赔钱机场, 良心云,干杯机场], icon: 'https://fastly.jsdelivr.net/gh/Orz-3/mini@master/Color/Static.png'}
+  - {name: telegram, type: select, proxies: [全部节点, 美国自动策略, 美国故转, 香港故转, 香港自动策略, 台湾故转, 日本故转, 韩国故转, 新国故转, 英国故转, 法国故转, 德国故转, 顶级机场,Kitty,亏本机场, 赔钱机场, 良心云,干杯机场], icon: 'https://fastly.jsdelivr.net/gh/Orz-3/mini@master/Color/Telegram.png'}
   - {name: C-Proxy, type: select, proxies: [美国自动策略, 美国故转, 香港故转, 香港自动策略, 台湾故转, 日本故转, 韩国故转, 全部负载均衡, 新国故转, 英国故转, 法国故转, 德国故转, 顶级机场,Kitty,亏本机场, 赔钱机场, 良心云,干杯机场], icon: 'https://fastly.jsdelivr.net/gh/Orz-3/mini@master/Color/Global.png'}
-  - {name: 全部自动, <<: *UrlTest, exclude-filter: "剩余|流量|官网|套餐|到期|游戏", icon: 'https://fastly.jsdelivr.net/gh/Orz-3/mini@master/Color/Auto.png'}
-  - {name: 全部故障转移, <<: *FallBack, exclude-filter: "剩余|流量|官网|套餐|到期|游戏", icon: 'https://fastly.jsdelivr.net/gh/Orz-3/mini@master/Color/Final.png'}
-  - {name: 全部负载均衡, <<: *LoadBalance, exclude-filter: "剩余|流量|官网|套餐|到期|游戏", icon: 'https://fastly.jsdelivr.net/gh/Orz-3/mini@master/Color/Auto.png'}
-  - {name: 游戏选择, type: select, include-all-providers: true, filter: *FilterGame, proxies: [DIRECT, 全球选择], icon: 'https://fastly.jsdelivr.net/gh/Orz-3/mini@master/Color/GAME.png'}
   - {name: 全球选择, type: select, proxies: [兜底后备策略, 全部自动, 全部故障转移, 全部负载均衡, 美国自动策略, 美国故转, 香港自动策略, 台湾自动策略, 日本自动策略, 韩国自动策略, 新国自动策略, 英国自动策略, 法国自动策略, 德国自动策略, 顶级机场,Kitty,亏本机场, 赔钱机场,  良心云,干杯机场], icon: 'https://fastly.jsdelivr.net/gh/Orz-3/mini@master/Color/Global.png'}
   - {name: AI, type: fallback, proxies: [美国自动策略, 日本自动策略, 台湾自动策略, 新国故转, 美国故转], icon: 'https://fastly.jsdelivr.net/gh/Koolson/Qure@master/IconSet/Color/ChatGPT.png'}
   - {name: 兜底后备策略, type: select, proxies: [DIRECT, 全部节点, 全部负载均衡, 美国自动策略, 美国故转, 香港故转, 香港自动策略, 台湾故转, 日本故转, 韩国故转, 新国故转, 英国故转, 法国故转, 德国故转, 顶级机场,Kitty,亏本机场, 赔钱机场, 良心云,干杯机场], icon: 'https://fastly.jsdelivr.net/gh/Orz-3/mini@master/Color/Final.png'}
-  - {name: telegram, type: select, proxies: [全部节点, 美国自动策略, 美国故转, 香港故转, 香港自动策略, 台湾故转, 日本故转, 韩国故转, 新国故转, 英国故转, 法国故转, 德国故转, 顶级机场,Kitty,亏本机场, 赔钱机场, 良心云,干杯机场], icon: 'https://fastly.jsdelivr.net/gh/Orz-3/mini@master/Color/Telegram.png'}
+  - {name: 全部自动, <<: *UrlTest, exclude-filter: "剩余|流量|官网|套餐|到期|游戏", icon: 'https://fastly.jsdelivr.net/gh/Orz-3/mini@master/Color/Auto.png'}
+  - {name: 全部负载均衡, <<: *LoadBalance, exclude-filter: "剩余|流量|官网|套餐|到期|游戏", icon: 'https://fastly.jsdelivr.net/gh/Orz-3/mini@master/Color/Auto.png'}
+  - {name: 全部故障转移, <<: *FallBack, exclude-filter: "剩余|流量|官网|套餐|到期|游戏", icon: 'https://fastly.jsdelivr.net/gh/Orz-3/mini@master/Color/Final.png'}
+  - {name: 游戏选择, type: select, include-all-providers: true, filter: *FilterGame, proxies: [DIRECT, 全球选择], icon: 'https://fastly.jsdelivr.net/gh/Orz-3/mini@master/Color/GAME.png'}
   - {name: 干杯机场, type: select, use: [干杯机场], exclude-filter: "剩余|流量|官网|套餐|到期|游戏", icon: 'https://cdn.jsdelivr.net/gh/Daveccx/ConvertRules@main/icons/ganbei.png'}
   - {name: 赔钱机场, type: select, use: [赔钱机场], exclude-filter: "剩余|流量|官网|套餐|到期|游戏", icon: 'https://cdn.jsdelivr.net/gh/Daveccx/ConvertRules@main/icons/peiqian.png'}
   - {name: 亏本机场, type: select, use: [亏本机场], exclude-filter: "剩余|流量|官网|套餐|到期|游戏", icon: 'https://cdn.jsdelivr.net/gh/Daveccx/ConvertRules@main/icons/kuiben.png'}
