@@ -78,7 +78,7 @@ dns:
     geoip: false
     ipcidr:
     - 240.0.0.0/4
-NodeParam:
+NodeParam: &NodeParam
   type: http
   interval: 1800
   health-check: &id001
@@ -89,73 +89,55 @@ NodeParam:
     lazy: true
 proxy-providers:
   Kitty:
-    type: http
-    interval: 1800
-    health-check: *id001
     url: ''
-    path: ./proxy_providers/provider-5.yaml
+    <<: *NodeParam
+    path: './proxy_providers/provider-5.yaml'
     override:
       additional-prefix: '[Kitty] '
   良心云:
-    type: http
-    interval: 1800
-    health-check: *id001
     url: ''
-    path: ./proxy_providers/provider-1.yaml
+    <<: *NodeParam
+    path: './proxy_providers/provider-1.yaml'
     override:
       additional-prefix: '[良心云] '
   干杯机场:
-    type: http
-    interval: 1800
-    health-check: *id001
     url: ''
-    path: ./proxy_providers/provider-2.yaml
+    <<: *NodeParam
+    path: './proxy_providers/provider-2.yaml'
     override:
       additional-prefix: '[干杯机场] '
   亏本机场:
-    type: http
-    interval: 1800
-    health-check: *id001
     url: ''
-    path: ./proxy_providers/provider-3.yaml
+    <<: *NodeParam
+    path: './proxy_providers/provider-3.yaml'
     override:
       additional-prefix: '[亏本机场] '
   赔钱机场:
-    type: http
-    interval: 1800
-    health-check: *id001
     url: ''
-    path: ./proxy_providers/provider-4.yaml
+    <<: *NodeParam
+    path: './proxy_providers/provider-4.yaml'
     override:
       additional-prefix: '[赔钱机场] '
   顶级机场:
-    type: http
-    interval: 1800
-    health-check: *id001
     url: ''
-    path: ./proxy_providers/provider-6.yaml
+    <<: *NodeParam
+    path: './proxy_providers/provider-6.yaml'
     override:
       additional-prefix: '[顶级机场] '
   雪山机场:
-    type: http
-    interval: 1800
-    health-check: *id001
     url: ''
+    <<: *NodeParam
     path: './proxy_providers/provider-7.yaml'
     override:
-      additional-prefix: "[雪山机场] "
-
+      additional-prefix: '[雪山机场] '
   cf优选:
-    type: http
-    interval: 1800
-    health-check: *id001
-    proxy: 全部自动
     url: ''
+    <<: *NodeParam
+    proxy: 全部自动
     path: './proxy_providers/provider-8.yaml'
     override:
-      additional-prefix: "[cf优选] "
+      additional-prefix: '[cf优选] '
 
-      
 # 锚点 - 节点筛选组
 FilterHK: &FilterHK '^(?=.*((?i)🇭🇰|香港|(\b(HK|HKG|Hong)(\d+)?\b)))(?!.*((?i)回国|校园|游戏|🎮|(\b(GAME)\b))).*$'
 FilterTW: &FilterTW '^(?=.*((?i)🇹🇼|台湾|(\b(TW|TWN|Tai|Taiwan)(\d+)?\b)))(?!.*((?i)回国|校园|游戏|🎮|(\b(GAME)\b))).*$'
