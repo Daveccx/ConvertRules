@@ -79,6 +79,13 @@ proxy-providers:
     url: ''
     <<: *NodeParam
     proxy: 全部自动
+    interval: 14200
+    health-check:
+      enable: true
+      url: 'https://www.gstatic.com/generate_204'
+      interval: 1200
+      timeout: 50000
+      lazy: true
     path: './proxy_providers/provider-8.yaml'
     override:
       additional-prefix: '[cf优选] '
