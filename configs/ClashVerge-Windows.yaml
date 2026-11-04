@@ -296,9 +296,9 @@ rule-providers:
     behavior: classical
     format: yaml
     interval: 3600
-    proxy: DIRECT
+    proxy: 全部自动
     path: './rules/myProxy_ip.yaml'
-    url: 'https://cdn.jsdelivr.net/gh/Daveccx/ConvertRules@main/rules/myProxy_ip.yaml'
+    url: 'https://raw.githubusercontent.com/Daveccx/ConvertRules/main/rules/myProxy_ip.yaml'
 
   ALan:
     type: http
