@@ -353,4 +353,3 @@ rules:
   - RULE-SET, ChinaMax, DIRECT
   - RULE-SET, CN_IP, DIRECT, no-resolve
   - MATCH, 兜底后备策略
-
