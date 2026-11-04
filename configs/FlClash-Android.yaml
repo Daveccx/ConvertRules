@@ -94,6 +94,7 @@ proxy-providers:
     type: http
     interval: 1800
     health-check: *id001
+    proxy: 全部自动
     url: ''
     path: './proxy_providers/provider-8.yaml'
     override:

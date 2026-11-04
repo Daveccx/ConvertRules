@@ -190,6 +190,7 @@ proxy-providers:
   cf优选:
     url: ''
     <<: *NodeParam
+    proxy: 全部自动
     path: './proxy_providers/provider-8.yaml'
     override:
       additional-prefix: "[cf优选] " # 为订阅节点添加机场名称前缀
