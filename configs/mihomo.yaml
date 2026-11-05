@@ -187,21 +187,6 @@ proxy-providers:
     path: './proxy_providers/provider-7.yaml'
     override:
       additional-prefix: "[雪山机场] " # 为订阅节点添加机场名称前缀
-  cf优选:
-    url: ''
-    <<: *NodeParam
-    proxy: 全部自动
-    interval: 14200
-    health-check:
-      enable: true
-      url: 'https://www.gstatic.com/generate_204'
-      interval: 1200
-      timeout: 50000
-      lazy: true
-    path: './proxy_providers/provider-8.yaml'
-    override:
-      additional-prefix: "[cf优选] " # 为订阅节点添加机场名称前缀
-  
 # 锚点 - 节点筛选组
 FilterHK: &FilterHK '^(?=.*((?i)🇭🇰|香港|(\b(HK|HKG|Hong)(\d+)?\b)))(?!.*((?i)回国|校园|游戏|🎮|(\b(GAME)\b))).*$'
 FilterTW: &FilterTW '^(?=.*((?i)🇹🇼|台湾|(\b(TW|TWN|Tai|Taiwan)(\d+)?\b)))(?!.*((?i)回国|校园|游戏|🎮|(\b(GAME)\b))).*$'
@@ -235,12 +220,12 @@ IpProviders: &IpProviders {type: http, behavior: ipcidr, interval: 86400, format
 
 # 策略组
 proxy-groups: 
-  - {name: 全部节点, type: select, proxies: [全部自动, 全部故障转移, 全部负载均衡, 美国自动策略, 美国故转, 香港自动策略, 台湾自动策略, 日本自动策略, 韩国自动策略, 新国自动策略, 英国自动策略, 法国自动策略, 德国自动策略,顶级机场, Kitty,亏本机场, 赔钱机场, 良心云,干杯机场, 雪山机场, cf优选], icon: 'https://fastly.jsdelivr.net/gh/Orz-3/mini@master/Color/Static.png'}
-  - {name: telegram, type: select, proxies: [全部节点, 美国自动策略, 美国故转, 香港故转, 香港自动策略, 台湾故转, 日本故转, 韩国故转, 新国故转, 英国故转, 法国故转, 德国故转, 顶级机场,Kitty,亏本机场, 赔钱机场, 良心云,干杯机场, 雪山机场, cf优选], icon: 'https://fastly.jsdelivr.net/gh/Orz-3/mini@master/Color/Telegram.png'}
-  - {name: C-Proxy, type: select, proxies: [美国自动策略, 美国故转, 香港故转, 香港自动策略, 台湾故转, 日本故转, 韩国故转, 全部负载均衡, 新国故转, 英国故转, 法国故转, 德国故转, 顶级机场,Kitty,亏本机场, 赔钱机场, 良心云,干杯机场, 雪山机场, cf优选], icon: 'https://fastly.jsdelivr.net/gh/Orz-3/mini@master/Color/Global.png'}
-  - {name: 全球选择, type: select, proxies: [全部自动, 兜底后备策略, 全部故障转移, 全部负载均衡, 美国自动策略, 美国故转, 香港自动策略, 台湾自动策略, 日本自动策略, 韩国自动策略, 新国自动策略, 英国自动策略, 法国自动策略, 德国自动策略, 顶级机场,Kitty,亏本机场, 赔钱机场,  良心云,干杯机场, 雪山机场, cf优选], icon: 'https://fastly.jsdelivr.net/gh/Orz-3/mini@master/Color/Global.png'}
+  - {name: 全部节点, type: select, proxies: [全部自动, 全部故障转移, 全部负载均衡, 美国自动策略, 美国故转, 香港自动策略, 台湾自动策略, 日本自动策略, 韩国自动策略, 新国自动策略, 英国自动策略, 法国自动策略, 德国自动策略,顶级机场, Kitty,亏本机场, 赔钱机场, 良心云,干杯机场, 雪山机场], icon: 'https://fastly.jsdelivr.net/gh/Orz-3/mini@master/Color/Static.png'}
+  - {name: telegram, type: select, proxies: [全部节点, 美国自动策略, 美国故转, 香港故转, 香港自动策略, 台湾故转, 日本故转, 韩国故转, 新国故转, 英国故转, 法国故转, 德国故转, 顶级机场,Kitty,亏本机场, 赔钱机场, 良心云,干杯机场, 雪山机场], icon: 'https://fastly.jsdelivr.net/gh/Orz-3/mini@master/Color/Telegram.png'}
+  - {name: C-Proxy, type: select, proxies: [美国自动策略, 美国故转, 香港故转, 香港自动策略, 台湾故转, 日本故转, 韩国故转, 全部负载均衡, 新国故转, 英国故转, 法国故转, 德国故转, 顶级机场,Kitty,亏本机场, 赔钱机场, 良心云,干杯机场, 雪山机场], icon: 'https://fastly.jsdelivr.net/gh/Orz-3/mini@master/Color/Global.png'}
+  - {name: 全球选择, type: select, proxies: [全部自动, 兜底后备策略, 全部故障转移, 全部负载均衡, 美国自动策略, 美国故转, 香港自动策略, 台湾自动策略, 日本自动策略, 韩国自动策略, 新国自动策略, 英国自动策略, 法国自动策略, 德国自动策略, 顶级机场,Kitty,亏本机场, 赔钱机场,  良心云,干杯机场, 雪山机场], icon: 'https://fastly.jsdelivr.net/gh/Orz-3/mini@master/Color/Global.png'}
   - {name: AI, type: select, proxies: [美国自动策略, 日本自动策略, 台湾自动策略, 新国故转, 美国故转], icon: 'https://fastly.jsdelivr.net/gh/Koolson/Qure@master/IconSet/Color/ChatGPT.png'}
-  - {name: 兜底后备策略, type: select, proxies: [DIRECT, 全部节点, 全部负载均衡, 美国自动策略, 美国故转, 香港故转, 香港自动策略, 台湾故转, 日本故转, 韩国故转, 新国故转, 英国故转, 法国故转, 德国故转, 顶级机场,Kitty,亏本机场, 赔钱机场, 良心云,干杯机场, 雪山机场, cf优选], icon: 'https://fastly.jsdelivr.net/gh/Orz-3/mini@master/Color/Final.png'}
+  - {name: 兜底后备策略, type: select, proxies: [DIRECT, 全部节点, 全部负载均衡, 美国自动策略, 美国故转, 香港故转, 香港自动策略, 台湾故转, 日本故转, 韩国故转, 新国故转, 英国故转, 法国故转, 德国故转, 顶级机场,Kitty,亏本机场, 赔钱机场, 良心云,干杯机场, 雪山机场], icon: 'https://fastly.jsdelivr.net/gh/Orz-3/mini@master/Color/Final.png'}
   - {name: 全部自动, <<: *UrlTest, exclude-filter: "剩余|流量|官网|套餐|到期|游戏", icon: 'https://fastly.jsdelivr.net/gh/Orz-3/mini@master/Color/Auto.png'}
   - {name: 全部负载均衡, <<: *LoadBalance, exclude-filter: "剩余|流量|官网|套餐|到期|游戏", icon: 'https://fastly.jsdelivr.net/gh/Orz-3/mini@master/Color/Auto.png'}
   - {name: 全部故障转移, <<: *FallBack, exclude-filter: "剩余|流量|官网|套餐|到期|游戏", icon: 'https://fastly.jsdelivr.net/gh/Orz-3/mini@master/Color/Final.png'}
@@ -252,7 +237,6 @@ proxy-groups:
   - {name: Kitty, type: select, use: [Kitty], exclude-filter: "剩余|流量|官网|套餐|到期|游戏|距离下次", icon: 'https://cdn.jsdelivr.net/gh/Daveccx/ConvertRules@main/icons/kitty.png'}
   - {name: 顶级机场, type: select, use: [顶级机场], exclude-filter: "剩余|流量|官网|套餐|到期|游戏|距离下次", icon: 'https://cdn.jsdelivr.net/gh/Daveccx/ConvertRules@main/icons/dingji.png'}
   - {name: 雪山机场, type: select, use: [雪山机场], exclude-filter: "剩余|流量|官网|套餐|到期|游戏|距离下次", icon: 'https://cdn.jsdelivr.net/gh/Daveccx/ConvertRules@main/icons/xueshan.png'}
-  - {name: cf优选, type: select, use: [cf优选], exclude-filter: "剩余|流量|官网|套餐|到期|游戏|距离下次|公益代理频道|退群订阅自动失效", icon: 'https://cdn.jsdelivr.net/gh/Daveccx/ConvertRules@main/icons/cloudflare-256.png'}
  
   - {name: 香港故转, <<: *FallBack, filter: *FilterHK, icon: 'https://fastly.jsdelivr.net/gh/Orz-3/mini@master/Color/HK.png'}
   - {name: 台湾故转, <<: *FallBack, filter: *FilterTW, icon: 'https://fastly.jsdelivr.net/gh/Orz-3/mini@master/Color/TW.png'}
