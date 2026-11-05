@@ -2,7 +2,7 @@
 
 mixed-port: 7890
 unified-delay: true
-geo-auto-update: false
+geo-auto-update: true
 geo-update-interval: 24
 tcp-concurrent: true
 allow-lan: true

@@ -1,7 +1,7 @@
 # Clash Verge Rev · Windows
 
 unified-delay: true
-geo-auto-update: false
+geo-auto-update: true
 geo-update-interval: 24
 tcp-concurrent: true
 mode: rule
