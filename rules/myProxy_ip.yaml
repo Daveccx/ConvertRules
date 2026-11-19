@@ -1,5 +1,40 @@
 
 payload:
+ ##PT站点##
+  - DOMAIN-SUFFIX,agsvpt.cn
+  - DOMAIN-SUFFIX,agsvpt.com
+  - DOMAIN-SUFFIX,audiences.me
+  - DOMAIN-SUFFIX,bilibili.download
+  - DOMAIN-SUFFIX,cangbao.ge
+  - DOMAIN-SUFFIX,colapt.com
+  - DOMAIN-SUFFIX,cspt.top
+  - DOMAIN-SUFFIX,cyanbug.net
+  - DOMAIN-SUFFIX,dmhy.org
+  - DOMAIN-SUFFIX,dstudio.me
+  - DOMAIN-SUFFIX,uhddolby.com
+  - DOMAIN-SUFFIX,hdfans.org
+  - DOMAIN-SUFFIX,hdhome.org
+  - DOMAIN-SUFFIX,hhanclub.net
+  - DOMAIN-SUFFIX,lemonhd.net
+  - DOMAIN-SUFFIX,m-team.cc
+  - DOMAIN-SUFFIX,m-team.io
+  - DOMAIN-SUFFIX,novahd.top
+  - DOMAIN-SUFFIX,oshen.win
+  - DOMAIN-SUFFIX,pterclub.net
+  - DOMAIN-SUFFIX,ptchdbits.co
+  - DOMAIN-SUFFIX,ptskit.org
+  - DOMAIN-SUFFIX,pttime.org
+  - DOMAIN-SUFFIX,qingwapt.com
+  - DOMAIN-SUFFIX,raingfh.top
+  - DOMAIN-SUFFIX,share.dmhy.org
+  - DOMAIN-SUFFIX,tangpt.top
+  - DOMAIN-SUFFIX,totheglory.im
+  - DOMAIN-SUFFIX,ubits.club
+  - DOMAIN-SUFFIX,uhddolby.com
+  - DOMAIN-SUFFIX,zmpt.cc
+  - DOMAIN-SUFFIX,zhuque.in
+
+ ##自定义##
   - DOMAIN-KEYWORD,authcode
   - DOMAIN-SUFFIX,bangumi.tv
   - DOMAIN-SUFFIX,bgm.tv
