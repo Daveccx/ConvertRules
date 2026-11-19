@@ -424,7 +424,7 @@ rules:
   - RULE-SET, ALan, DIRECT
 
 #代理
-  - RULE-SET, myProxy_ip,全球选择
+  - RULE-SET, myProxy_ip,C-Proxy
 
   # 站点专用分流
   - DOMAIN-SUFFIX,dmm.co.jp,日本自动策略
