@@ -1,6 +1,7 @@
 
 payload:
  ##PT站点##
+  - DOMAIN-SUFFIX,ourbits.club
   - DOMAIN-SUFFIX,agsvpt.cn
   - DOMAIN-SUFFIX,agsvpt.com
   - DOMAIN-SUFFIX,audiences.me
